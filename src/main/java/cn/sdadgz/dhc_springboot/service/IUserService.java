@@ -13,4 +13,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IUserService extends IService<User> {
 
+    // 验证密码
+    boolean verifyPassword(String password);
+
 }

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -19,23 +20,24 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@ApiModel(value = "Carousel对象", description = "")
-public class Carousel implements Serializable {
+@ApiModel(value = "Essay对象", description = "")
+public class Essay implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
+    private String url;
+
+    private String text;
+
     private String title;
 
-    private Integer imgId;
+    private LocalDateTime createTime;
+
+    private Integer userId;
 
     @TableField(exist = false)
-    private Img img;
-
-    private Integer essayId;
-
-    @TableField(exist = false)
-    private Essay essay;
+    private User user;
 }

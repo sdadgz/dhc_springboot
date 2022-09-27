@@ -32,13 +32,12 @@ public class UserController {
     @Resource
     private IUserService userService;
 
-    private final String SALT = "我真是个活废物，除了复制别人的代码还是复制别人的代码，这就是低级码农吗";
-
     @PostMapping("/register")
     public Result register(@RequestBody User user) throws NoSuchAlgorithmException {
 
         // 密码加密
-        user.setPassword(Md5Util.md5(user.getPassword() + UserUtil.SALT));
+        String password = UserUtil.getPassword(user.getPassword());
+        user.setPassword(password);
 
         userMapper.insert(user);
 

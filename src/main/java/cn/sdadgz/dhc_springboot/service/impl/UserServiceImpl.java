@@ -17,4 +17,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
+    // 验证密码
+    @Override
+    public boolean verifyPassword(String password) {
+
+        return false;
+    }
 }
