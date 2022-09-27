@@ -1,5 +1,6 @@
 package cn.sdadgz.dhc_springboot.Utils;
 
+import cn.sdadgz.dhc_springboot.entity.User;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -16,8 +17,12 @@ public class JwtUtil {
 
     private static final int DURATION_HOUR = 24;
 
+    public static String createToken(User user) throws NoSuchAlgorithmException {
+        return createToken(user.getId().toString(),user.getName(),user.getPassword());
+    }
+
     //创建token
-    public static String CreateToken(String userid, String username, String password) throws NoSuchAlgorithmException {
+    public static String createToken(String userid, String username, String password) throws NoSuchAlgorithmException {
         Calendar now = Calendar.getInstance();
         now.add(Calendar.HOUR, DURATION_HOUR);
         Date time = now.getTime();
