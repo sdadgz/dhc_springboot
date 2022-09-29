@@ -28,8 +28,6 @@ public class Essay implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    private String url;
-
     private String text;
 
     private String title;

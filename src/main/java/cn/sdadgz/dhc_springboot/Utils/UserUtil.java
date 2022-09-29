@@ -1,5 +1,6 @@
 package cn.sdadgz.dhc_springboot.Utils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.NoSuchAlgorithmException;
 
 public class UserUtil {

@@ -36,4 +36,6 @@ public class Img implements Serializable {
     private LocalDateTime createTime;
 
     private String reduceUrl;
+
+    private Integer essayId;
 }

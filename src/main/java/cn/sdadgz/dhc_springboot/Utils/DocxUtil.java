@@ -25,6 +25,11 @@ public class DocxUtil {
     private static final String OVERRIDE_IMG_SUFFIX = "\" />"; // 后缀
 
     // 从docx中提取图片
+    public static void getImgsFromDocx(String path, String outDir) throws IOException {
+        getImgsFromDocx(new File(path), outDir);
+    }
+
+    // 从docx中提取图片
     public static void getImgsFromDocx(File file, String outDir) throws IOException {
         XWPFDocument document = new XWPFDocument(new FileInputStream(file));
         // 用XWPFDocument的getAllPictures来获取所有的图片
@@ -42,27 +47,31 @@ public class DocxUtil {
     }
 
     // 将生成的html文件中的图片替换
-    public static void replaceImg(File file, Img[] imgs) {
+    public static String replaceImg(File file, List<Img> imgs) {
         // 才没有在骂人
         StringBuilder sb = readHtml(file);
         // 图片索引
         int index = 0;
+        int startIndex = 0;
 
-        for (int i = 0; i < imgs.length; i++) {
+        for (int i = 0; i < imgs.size(); i++) {
             // 插入点
-            int insertPoint = sb.indexOf(IMG_PREFIX, index);
+            int insertPoint = sb.indexOf(IMG_PREFIX, startIndex);
             // 删除点
             int deleteEndPoint = sb.indexOf(IMG_SUFFIX, insertPoint) + IMG_SUFFIX.length();
             // 删除
             sb.delete(insertPoint, deleteEndPoint);
             // 插入
-            String insertStr = OVERRIDE_IMG_PREFIX + imgs[index++].getUrl() + OVERRIDE_IMG_SUFFIX;
+            String insertStr = OVERRIDE_IMG_PREFIX + imgs.get(index++).getUrl() + OVERRIDE_IMG_SUFFIX;
             sb.insert(insertPoint, insertStr);
+            // 更新开始索引
+            startIndex = insertPoint + insertStr.length();
         }
 
+        // 重写html文件
         overHtml(file, sb.toString());
 
-        System.out.println(sb);
+        return sb.toString();
     }
 
     // 重写html
@@ -110,9 +119,13 @@ public class DocxUtil {
         return htmlSb;
     }
 
+    public static void docxToHtml(String path, String toPath) throws IOException, Docx4JException {
+        docxToHtml(new File(path), toPath);
+    }
+
     // 转为html，复制的
-    public static void docxToHtml(String path, String toPath) throws Docx4JException, IOException {
-        WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(new File(path));
+    public static void docxToHtml(File file, String toPath) throws Docx4JException, IOException {
+        WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(file);
         OutputStream os = new ByteArrayOutputStream();
         HTMLSettings htmlSettings = Docx4J.createHTMLSettings();
         htmlSettings.setUserBodyTail("");

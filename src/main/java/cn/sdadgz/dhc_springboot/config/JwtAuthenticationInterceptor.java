@@ -3,6 +3,7 @@ package cn.sdadgz.dhc_springboot.config;
 import cn.sdadgz.dhc_springboot.Utils.JwtUtil;
 import cn.sdadgz.dhc_springboot.entity.User;
 import cn.sdadgz.dhc_springboot.mapper.UserMapper;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Objects;
 
+@Component
 public class JwtAuthenticationInterceptor implements HandlerInterceptor {
 
     @Resource
