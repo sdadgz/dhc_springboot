@@ -1,5 +1,6 @@
 package cn.sdadgz.dhc_springboot;
 
+import cn.sdadgz.dhc_springboot.Utils.FileUtil;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFPictureData;
 import org.docx4j.Docx4J;
@@ -22,9 +23,6 @@ class DhcSpringbootApplicationTests {
 
     @Test
     void contextLoads() {
-        String path = "D:/下载/不用思考，删这个文件夹/testDelete";
-        File file = new File(path);
-        File[] files = file.listFiles();
-        System.out.println(Arrays.toString(files));
+
     }
 }

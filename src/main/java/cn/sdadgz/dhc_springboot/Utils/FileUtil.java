@@ -2,13 +2,50 @@ package cn.sdadgz.dhc_springboot.Utils;
 
 import cn.sdadgz.dhc_springboot.config.BusinessException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
 
 @Slf4j
+@Component
 public class FileUtil {
+
+    // 他自己
+    private static FileUtil fileUtil;
+
+    @PostConstruct
+    public void init() {
+        fileUtil = this;
+    }
+
+    @Value("${my.file-config.uploadPath}")
+    private String uploadPath;
+
+    @Value("${my.file-config.downloadPath}")
+    private String downloadPath;
+
+    // 路径纠正
+    public static String pathCorrect(String path) {
+        return path.replace('\\', '/');
+    }
+
+    // 路径转url
+    public static String toUrl(String path) {
+        // 替换反杠
+        path = pathCorrect(path);
+
+        // 包含上传路径
+        if (path.contains(fileUtil.uploadPath)) {
+            String substring = path.substring(fileUtil.uploadPath.length());
+            path = fileUtil.downloadPath + substring;
+        }
+
+        return path;
+    }
 
     // 上传到服务器
     public static void uploadToServer(MultipartFile file, String path) {
@@ -59,8 +96,8 @@ public class FileUtil {
                         log.error("FileUtil::deleteDir  {} delete error", f.getAbsolutePath());
                         return false;
                     }
-                }else {
-                    if (!deleteDir(f.getAbsolutePath())){
+                } else {
+                    if (!deleteDir(f.getAbsolutePath())) {
                         return false;
                     }
                 }

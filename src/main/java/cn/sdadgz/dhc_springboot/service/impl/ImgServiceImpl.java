@@ -1,5 +1,6 @@
 package cn.sdadgz.dhc_springboot.service.impl;
 
+import cn.sdadgz.dhc_springboot.Utils.FileUtil;
 import cn.sdadgz.dhc_springboot.Utils.Md5Util;
 import cn.sdadgz.dhc_springboot.Utils.TimeUtil;
 import cn.sdadgz.dhc_springboot.config.BusinessException;
@@ -42,11 +43,7 @@ public class ImgServiceImpl extends ServiceImpl<ImgMapper, Img> implements IImgS
         img.setEssayId(essayId);
 
         // 解析路径
-        if (!path.contains(uploadPath)) {
-            throw new BusinessException("543", "essay内部图片路径异常");
-        }
-        String suffix = path.substring(uploadPath.length());
-        String url = downloadPath + suffix;
+        String url = FileUtil.toUrl(path);
         img.setUrl(url);
 
         // md5

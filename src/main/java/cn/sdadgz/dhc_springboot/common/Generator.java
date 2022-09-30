@@ -15,7 +15,7 @@ public class Generator {
 //        String localPath = "D:/CODE/";
 
         // 表名
-        String tableName = "essay";
+        String tableName = "field";
 
         FastAutoGenerator.create(
                         "jdbc:mysql://sdadgz.cn:3307/dhc",
