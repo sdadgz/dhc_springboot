@@ -1,7 +1,10 @@
 package cn.sdadgz.dhc_springboot.service;
 
+import cn.sdadgz.dhc_springboot.entity.Essay;
 import cn.sdadgz.dhc_springboot.entity.Field;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>

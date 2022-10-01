@@ -10,7 +10,7 @@ my:
 
 spring:
   datasource:
-    url: jdbc:mysql://sdadgz.cn:3307/dhc
+    url: jdbc:mysql://sdadgz.cn:3307/dhc?serverTimezone=UTC&characterEncoding=utf8
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     username: root

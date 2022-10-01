@@ -3,8 +3,12 @@ package cn.sdadgz.dhc_springboot.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -12,7 +16,7 @@ import lombok.Setter;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author sdadgz
@@ -28,7 +32,7 @@ public class Essay implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    private String url;
+    private String text;
 
     private String title;
 
@@ -38,4 +42,15 @@ public class Essay implements Serializable {
 
     @TableField(exist = false)
     private User user;
+
+    // 获取essay时不返回他的内容
+    @JsonIgnore
+    public String getText() {
+        return text;
+    }
+
+    @JsonProperty
+    public void setText(String text) {
+        this.text = text;
+    }
 }

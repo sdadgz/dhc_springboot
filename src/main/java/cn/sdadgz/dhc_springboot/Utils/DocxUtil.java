@@ -29,7 +29,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static cn.sdadgz.dhc_springboot.Utils.StringUtil.LEVER;
+import static cn.sdadgz.dhc_springboot.Utils.StringUtil.*;
 
 @Slf4j
 @Component
@@ -54,20 +54,12 @@ public class DocxUtil {
     @Resource
     private IImgService imgService;
 
-    private static final String[] SUPPORT_TYPE = {".docx"}; // 支持的文件类型
-    private static final String HTML_SUFFIX = ".html"; // html文件后缀
-
-    private static final String IMG_PREFIX = "<img "; // 修改前的供查找的图片前缀
-    private static final String IMG_SUFFIX = " />"; // 后缀
-
-    private static final String OVERRIDE_IMG_PREFIX = "<img src=\""; // 重写的图片前缀
-    private static final String OVERRIDE_IMG_SUFFIX = "\" />"; // 后缀
-
     // 封装的上传
     public static Essay upload(MultipartFile file, HttpServletRequest request) throws IOException, Docx4JException {
         // 初始化
         Essay essay = new Essay();
         essay.setCreateTime(TimeUtil.now());
+        essay.setText(UNDEFINED);
 
         // 原文件名
         String originalFilename = file.getOriginalFilename();
@@ -93,8 +85,6 @@ public class DocxUtil {
         String path = basePath + originalFilename;
         String htmlPath = basePath + title + HTML_SUFFIX;
         FileUtil.uploadToServer(file, path);
-        String htmlUrl = FileUtil.toUrl(htmlPath);
-        essay.setUrl(htmlUrl);
         docxUtil.essayMapper.insert(essay);
 
         // 处理docx
@@ -117,7 +107,9 @@ public class DocxUtil {
         }
 
         // 图片拿过来，搞里头
-        DocxUtil.replaceImg(new File(htmlPath), imgs);
+        String html = DocxUtil.replaceImg(new File(htmlPath), imgs);
+        essay.setText(html);
+        docxUtil.essayMapper.updateById(essay);
 
         return essay;
     }
@@ -156,7 +148,7 @@ public class DocxUtil {
     }
 
     // 将生成的html文件中的图片替换
-    public static void replaceImg(File file, List<Img> imgs) {
+    public static String replaceImg(File file, List<Img> imgs) {
         // 才没有在骂人
         StringBuilder sb = readHtml(file);
         // 图片索引
@@ -179,6 +171,9 @@ public class DocxUtil {
 
         // 重写html文件
         overHtml(file, sb.toString());
+
+        // 返回html
+        return sb.toString();
     }
 
     // 重写html

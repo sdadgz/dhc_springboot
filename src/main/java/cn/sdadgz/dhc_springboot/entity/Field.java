@@ -1,6 +1,7 @@
 package cn.sdadgz.dhc_springboot.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
@@ -27,6 +28,9 @@ public class Field implements Serializable {
     private Integer id;
 
     private Integer essayId;
+
+    @TableField(exist = false)
+    private Essay essay;
 
     private String field;
 }
