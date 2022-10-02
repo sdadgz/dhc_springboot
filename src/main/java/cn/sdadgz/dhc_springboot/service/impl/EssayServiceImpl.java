@@ -48,4 +48,5 @@ public class EssayServiceImpl extends ServiceImpl<EssayMapper, Essay> implements
 
         return fieldMapper.selectCount(wrapper);
     }
+
 }

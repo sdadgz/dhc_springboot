@@ -19,6 +19,8 @@ public class JwtInterceptorConfig implements WebMvcConfigurer {
                 .excludePathPatterns(
                         "/user/login", // 用户登录
                         "/user/register", // 用户注册
+                        "/essay/text", // 显示的html
+                        "/essay/page", // 获取分页
                         "/static/**");
     }
 

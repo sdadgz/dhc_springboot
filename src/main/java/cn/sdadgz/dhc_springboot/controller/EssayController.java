@@ -68,6 +68,16 @@ public class EssayController {
     @Resource
     private IEssayService essayService;
 
+    // 获取text
+    @GetMapping("/text")
+    public Result getText(@RequestParam("id") int id) {
+
+        // 获取text
+        Essay essay = essayMapper.selectById(id);
+
+        return Result.success(essay.getText());
+    }
+
     // 获取essay
     @GetMapping("/page")
     public Result getEssay(@RequestParam("field") String field,
