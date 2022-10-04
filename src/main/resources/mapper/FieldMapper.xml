@@ -2,4 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.sdadgz.dhc_springboot.mapper.FieldMapper">
 
+    <select id="getAllByField" resultMap="FieldMap">
+        select *
+        from field
+                 inner join essay e on e.id = field.essay_id
+                 inner join user u on e.user_id = u.id
+        where field like CONCAT('%', #{field}, '%')
+        limit #{startPage}, #{pageSize}
+    </select>
+
+    <resultMap id="FieldMap" type="field">
+        <association property="essay" resultMap="EssayMap"/>
+    </resultMap>
+    <resultMap id="EssayMap" type="essay">
+        <association property="user" javaType="user"/>
+    </resultMap>
+
 </mapper>

@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author sdadgz
@@ -34,4 +34,11 @@ public class FieldServiceImpl extends ServiceImpl<FieldMapper, Field> implements
         fieldMapper.insert(uploadObj);
         return uploadObj.getId();
     }
+
+    @Override
+    public List<Field> getField(String field, int currentPage, int pageSize) {
+        int startPage = (currentPage - 1) * pageSize;
+        return fieldMapper.getAllByField(field, startPage, pageSize);
+    }
+
 }

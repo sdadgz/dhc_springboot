@@ -19,4 +19,9 @@ import java.util.List;
 @Mapper
 public interface FieldMapper extends BaseMapper<Field> {
 
+    // 根据field模糊查询
+    List<Field> getAllByField(@Param("field") String field,
+                              @Param("startPage") int startPage,
+                              @Param("pageSize") int pageSize);
+
 }

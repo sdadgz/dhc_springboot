@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author sdadgz
@@ -17,6 +17,9 @@ import java.util.List;
 public interface IFieldService extends IService<Field> {
 
     // 设置文章领域
-    Integer setField(int essayId,String field);
+    Integer setField(int essayId, String field);
+
+    // 根据field模糊查询分页
+    List<Field> getField(String field,int currentPage,int pageSize);
 
 }

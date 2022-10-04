@@ -1,6 +1,8 @@
 package cn.sdadgz.dhc_springboot;
 
 import cn.sdadgz.dhc_springboot.Utils.FileUtil;
+import cn.sdadgz.dhc_springboot.Utils.JwtUtil;
+import cn.sdadgz.dhc_springboot.Utils.UserUtil;
 import cn.sdadgz.dhc_springboot.entity.Essay;
 import cn.sdadgz.dhc_springboot.entity.User;
 import cn.sdadgz.dhc_springboot.service.IEssayService;
@@ -39,24 +41,10 @@ class DhcSpringbootApplicationTests {
     }
 
     @Test
-    void getEssayPageByField(){
-        String field = "中心概况 组织框架";
-
-        List<Essay> page = essayService.getEssayPageByField(field, 1, 6);
-        System.out.println(page);
-
-    }
-
-    @Test
-    void userLogin() throws NoSuchAlgorithmException {
+    void getToken() throws NoSuchAlgorithmException {
         String union = "1";
-
-        User user = new User();
-        user.setName(union);
-        user.setPassword(union);
-
-        boolean b = userService.verifyPassword(user);
-        System.out.println(b);
-
+        String token = JwtUtil.createToken(union, union, UserUtil.getPassword(union));
+        System.out.println(token);
     }
+
 }
