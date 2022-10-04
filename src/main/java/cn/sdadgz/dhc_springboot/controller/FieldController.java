@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -36,9 +37,9 @@ public class FieldController {
                             @RequestParam("currentPage") Integer currentPage,
                             @RequestParam("pageSize") Integer pageSize) {
 
-        List<Field> list = fieldService.getField(field, currentPage, pageSize);
+        Map<String, Object> map = fieldService.getField(field, currentPage, pageSize);
 
-        return Result.success(list);
+        return Result.success(map);
     }
 
 }

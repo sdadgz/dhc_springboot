@@ -1,6 +1,5 @@
 package cn.sdadgz.dhc_springboot.service.impl;
 
-import cn.sdadgz.dhc_springboot.entity.Essay;
 import cn.sdadgz.dhc_springboot.entity.Field;
 import cn.sdadgz.dhc_springboot.mapper.FieldMapper;
 import cn.sdadgz.dhc_springboot.service.IFieldService;
@@ -9,7 +8,12 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static cn.sdadgz.dhc_springboot.Utils.StringUtil.RESULT_LISTS;
+import static cn.sdadgz.dhc_springboot.Utils.StringUtil.RESULT_TOTAL;
 
 /**
  * <p>
@@ -36,9 +40,26 @@ public class FieldServiceImpl extends ServiceImpl<FieldMapper, Field> implements
     }
 
     @Override
-    public List<Field> getField(String field, int currentPage, int pageSize) {
+    public Map<String, Object> getField(String field, int currentPage, int pageSize) {
+
+        // 初始化
+        Map<String,Object> map = new HashMap<>();
         int startPage = (currentPage - 1) * pageSize;
-        return fieldMapper.getAllByField(field, startPage, pageSize);
+
+        List<Field> lists = fieldMapper.getAllByField(field, startPage, pageSize);
+        Long total = getCount(field);
+
+        map.put(RESULT_LISTS,lists);
+        map.put(RESULT_TOTAL,total);
+
+        return map;
+    }
+
+    @Override
+    public Long getCount(String field) {
+        LambdaQueryWrapper<Field> wrapper = new LambdaQueryWrapper<>();
+        wrapper.like(Field::getField,field);
+        return fieldMapper.selectCount(wrapper);
     }
 
 }

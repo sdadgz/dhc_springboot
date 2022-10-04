@@ -1,10 +1,9 @@
 package cn.sdadgz.dhc_springboot.service;
 
-import cn.sdadgz.dhc_springboot.entity.Essay;
 import cn.sdadgz.dhc_springboot.entity.Field;
 import com.baomidou.mybatisplus.extension.service.IService;
 
-import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -20,6 +19,8 @@ public interface IFieldService extends IService<Field> {
     Integer setField(int essayId, String field);
 
     // 根据field模糊查询分页
-    List<Field> getField(String field,int currentPage,int pageSize);
+    Map<String, Object> getField(String field, int currentPage, int pageSize);
 
+    // 根据field获取总数
+    Long getCount(String field);
 }
