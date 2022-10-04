@@ -32,25 +32,17 @@ public class Essay implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
+    @JsonIgnore
     private String text;
 
     private String title;
 
     private LocalDateTime createTime;
 
+    @JsonIgnore
     private Integer userId;
 
     @TableField(exist = false)
     private User user;
 
-    // 获取essay时不返回他的内容
-    @JsonIgnore
-    public String getText() {
-        return text;
-    }
-
-    @JsonProperty
-    public void setText(String text) {
-        this.text = text;
-    }
 }

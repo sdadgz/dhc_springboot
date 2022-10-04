@@ -26,6 +26,7 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @JsonIgnore
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
@@ -33,7 +34,6 @@ public class User implements Serializable {
 
     private String password;
 
-    //获取用户时，不会返回密码
     @JsonIgnore
     public String getPassword() {
         return password;

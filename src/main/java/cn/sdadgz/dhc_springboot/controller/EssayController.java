@@ -11,6 +11,7 @@ import cn.sdadgz.dhc_springboot.entity.Field;
 import cn.sdadgz.dhc_springboot.entity.Img;
 import cn.sdadgz.dhc_springboot.mapper.EssayMapper;
 import cn.sdadgz.dhc_springboot.mapper.FieldMapper;
+import cn.sdadgz.dhc_springboot.mapper.UserMapper;
 import cn.sdadgz.dhc_springboot.service.IEssayService;
 import cn.sdadgz.dhc_springboot.service.IFieldService;
 import cn.sdadgz.dhc_springboot.service.IImgService;
@@ -68,14 +69,23 @@ public class EssayController {
     @Resource
     private IEssayService essayService;
 
+    @Resource
+    private UserMapper userMapper;
+
     // 获取text
     @GetMapping("/text")
     public Result getText(@RequestParam("id") int id) {
 
+        // 初始化
+        Map<String, Object> map = new HashMap<>();
+
         // 获取text
         Essay essay = essayMapper.selectById(id);
+        essay.setUser(userMapper.selectById(essay.getUserId()));
+        map.put(RESULT_ESSAY, essay);
+        map.put(RESULT_TEXT, essay.getText());
 
-        return Result.success(essay.getText());
+        return Result.success(map);
     }
 
     // 获取essay
@@ -94,6 +104,11 @@ public class EssayController {
         // 获取总数
         Long total = essayService.getEssayTotalByField(field);
         map.put(RESULT_TOTAL, total);
+
+        // 返回text
+        if (total == 1) {
+            map.put(RESULT_TEXT, lists.get(0).getText());
+        }
 
         return Result.success(map);
     }
