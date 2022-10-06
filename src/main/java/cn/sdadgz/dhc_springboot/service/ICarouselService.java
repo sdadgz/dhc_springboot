@@ -3,6 +3,8 @@ package cn.sdadgz.dhc_springboot.service;
 import cn.sdadgz.dhc_springboot.entity.Carousel;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -12,5 +14,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2022-09-27
  */
 public interface ICarouselService extends IService<Carousel> {
+
+    // 根据essayId批量删除
+    void deleteByEssayIds(List<Integer> idList);
 
 }

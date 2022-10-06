@@ -84,7 +84,6 @@ public class EssayController {
         // 数据库删除
         essayService.deleteAllByIds(idList);
 
-
         return Result.success();
     }
 

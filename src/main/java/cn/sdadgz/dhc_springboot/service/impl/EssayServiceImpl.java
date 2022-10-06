@@ -4,6 +4,7 @@ import cn.sdadgz.dhc_springboot.entity.Essay;
 import cn.sdadgz.dhc_springboot.entity.Field;
 import cn.sdadgz.dhc_springboot.mapper.EssayMapper;
 import cn.sdadgz.dhc_springboot.mapper.FieldMapper;
+import cn.sdadgz.dhc_springboot.service.ICarouselService;
 import cn.sdadgz.dhc_springboot.service.IEssayService;
 import cn.sdadgz.dhc_springboot.service.IFieldService;
 import cn.sdadgz.dhc_springboot.service.IImgService;
@@ -37,6 +38,9 @@ public class EssayServiceImpl extends ServiceImpl<EssayMapper, Essay> implements
     @Resource
     private IImgService imgService;
 
+    @Resource
+    private ICarouselService carouselService;
+
     // 获取essay分页根据field
     @Override
     public List<Essay> getEssayPageByField(String field, int currentPage, int pageSize) {
@@ -62,6 +66,7 @@ public class EssayServiceImpl extends ServiceImpl<EssayMapper, Essay> implements
         removeByIds(idList); // 删除essay表数据
         fieldService.deleteByEssayIds(idList); // 删除field表数据
         imgService.deleteByEssayIds(idList); // 删除img表数据
+        carouselService.deleteByEssayIds(idList); // 删除轮播图
     }
 
     @Override
