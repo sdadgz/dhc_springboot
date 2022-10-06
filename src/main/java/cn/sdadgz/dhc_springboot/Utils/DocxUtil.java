@@ -24,6 +24,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,11 +56,15 @@ public class DocxUtil {
     private IImgService imgService;
 
     // 封装的上传
-    public static Essay upload(MultipartFile file, HttpServletRequest request) throws IOException, Docx4JException {
+    public static Essay upload(MultipartFile file, HttpServletRequest request) throws IOException, Docx4JException, NoSuchAlgorithmException {
         // 初始化
         Essay essay = new Essay();
         essay.setCreateTime(TimeUtil.now());
         essay.setText(UNDEFINED);
+
+        // 基础路径内容
+        String uuid = IdUtil.uuid();
+        String requestUsername = IdUtil.getName(request);
 
         // 原文件名
         String originalFilename = file.getOriginalFilename();
@@ -74,11 +79,11 @@ public class DocxUtil {
         essay.setUserId(userId);
 
         // 创建文件夹
-        String basePath = docxUtil.uploadPath + title + LEVER;
+        String basePath = docxUtil.uploadPath + requestUsername + UNDERLINE + uuid + LEVER;
         File baseDir = new File(basePath);
         if (!baseDir.exists()) {
             boolean mkdirs = baseDir.mkdirs();
-            log.info("创建文件夹 {}，{}", title, mkdirs ? "成功" : "失败");
+            log.info("创建文件夹 {}，{}", basePath, mkdirs ? "成功" : "失败");
         }
 
         // 前端传的文件搞本地上

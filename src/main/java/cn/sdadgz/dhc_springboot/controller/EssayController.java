@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.awt.image.TileObserver;
 import java.io.File;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -151,7 +152,7 @@ public class EssayController {
     @PostMapping("/upload")
     public Result upload(@RequestPart("file") MultipartFile file,
                          @RequestParam("field") String field,
-                         HttpServletRequest request) throws IOException, Docx4JException {
+                         HttpServletRequest request) throws IOException, Docx4JException, NoSuchAlgorithmException {
 
         // 初始化
         Map<String, Object> map = new HashMap<>();

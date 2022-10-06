@@ -4,6 +4,7 @@ public class StringUtil {
 
     public static final String LEVER = "/";
     public static final String UNDEFINED = "未定义";
+    public static final String UNDERLINE = "_";
     public static final String SPLIT = " ";
     public static final String RESULT_LISTS = "lists";
     public static final String RESULT_TOTAL = "total";
