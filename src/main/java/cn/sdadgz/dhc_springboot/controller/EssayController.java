@@ -74,6 +74,15 @@ public class EssayController {
     @Resource
     private UserMapper userMapper;
 
+    // 删除essay
+    @DeleteMapping("")
+    public Result delete(@RequestParam("id")int id){
+
+
+
+        return Result.success();
+    }
+
     // 修改
     @PutMapping("/update")
     public Result update(@RequestParam(value = "title", required = false) String title,

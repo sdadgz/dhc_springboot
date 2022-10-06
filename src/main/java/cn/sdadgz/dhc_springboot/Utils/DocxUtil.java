@@ -62,9 +62,11 @@ public class DocxUtil {
         essay.setCreateTime(TimeUtil.now());
         essay.setText(UNDEFINED);
 
-        // 基础路径内容
+        // 文件夹
         String uuid = IdUtil.uuid();
         String requestUsername = IdUtil.getName(request);
+        String dir = requestUsername + UNDERLINE + uuid;
+        essay.setDir(dir);
 
         // 原文件名
         String originalFilename = file.getOriginalFilename();
@@ -79,7 +81,7 @@ public class DocxUtil {
         essay.setUserId(userId);
 
         // 创建文件夹
-        String basePath = docxUtil.uploadPath + requestUsername + UNDERLINE + uuid + LEVER;
+        String basePath = docxUtil.uploadPath + dir + LEVER;
         File baseDir = new File(basePath);
         if (!baseDir.exists()) {
             boolean mkdirs = baseDir.mkdirs();
