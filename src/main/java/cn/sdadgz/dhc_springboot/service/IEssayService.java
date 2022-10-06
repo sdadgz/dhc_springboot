@@ -21,4 +21,10 @@ public interface IEssayService extends IService<Essay> {
     // 获取总数
     Long getEssayTotalByField(String field);
 
+    // 根据id批量删除
+    void deleteAllByIds(List<Integer> idList);
+
+    // 根据id批量获取
+    List<Essay> getEssayByIds(List<Integer> ids);
+
 }

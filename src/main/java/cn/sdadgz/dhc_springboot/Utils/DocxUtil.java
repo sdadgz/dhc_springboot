@@ -71,7 +71,7 @@ public class DocxUtil {
         // 原文件名
         String originalFilename = file.getOriginalFilename();
         if (!isSupport(originalFilename)) {
-            throw new BusinessException("442", "尚未支持该文件类型");
+            throw new BusinessException("542", "尚未支持该文件类型");
         }
 
         // 标题和用户id

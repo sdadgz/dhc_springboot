@@ -5,6 +5,8 @@ import cn.sdadgz.dhc_springboot.entity.Field;
 import cn.sdadgz.dhc_springboot.mapper.EssayMapper;
 import cn.sdadgz.dhc_springboot.mapper.FieldMapper;
 import cn.sdadgz.dhc_springboot.service.IEssayService;
+import cn.sdadgz.dhc_springboot.service.IFieldService;
+import cn.sdadgz.dhc_springboot.service.IImgService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,12 @@ public class EssayServiceImpl extends ServiceImpl<EssayMapper, Essay> implements
     @Resource
     private FieldMapper fieldMapper;
 
+    @Resource
+    private IFieldService fieldService;
+
+    @Resource
+    private IImgService imgService;
+
     // 获取essay分页根据field
     @Override
     public List<Essay> getEssayPageByField(String field, int currentPage, int pageSize) {
@@ -47,6 +55,20 @@ public class EssayServiceImpl extends ServiceImpl<EssayMapper, Essay> implements
         wrapper.eq(Field::getField, field);
 
         return fieldMapper.selectCount(wrapper);
+    }
+
+    @Override
+    public void deleteAllByIds(List<Integer> idList) {
+        removeByIds(idList); // 删除essay表数据
+        fieldService.deleteByEssayIds(idList); // 删除field表数据
+        imgService.deleteByEssayIds(idList); // 删除img表数据
+    }
+
+    @Override
+    public List<Essay> getEssayByIds(List<Integer> ids) {
+        LambdaQueryWrapper<Essay> wrapper = new LambdaQueryWrapper<>();
+        wrapper.in(Essay::getId,ids);
+        return essayMapper.selectList(wrapper);
     }
 
 }

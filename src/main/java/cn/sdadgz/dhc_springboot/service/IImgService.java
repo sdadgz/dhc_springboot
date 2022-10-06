@@ -3,6 +3,8 @@ package cn.sdadgz.dhc_springboot.service;
 import cn.sdadgz.dhc_springboot.entity.Img;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 服务类
@@ -15,5 +17,8 @@ public interface IImgService extends IService<Img> {
 
     // 根据已经存在的图片路径插入
     Img insertByPath(String path, int essayId);
+
+    // 根据essayId删除
+    void deleteByEssayIds(List<Integer> ids);
 
 }

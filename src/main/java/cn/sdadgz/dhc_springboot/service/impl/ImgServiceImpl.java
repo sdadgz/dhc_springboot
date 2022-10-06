@@ -7,12 +7,14 @@ import cn.sdadgz.dhc_springboot.config.BusinessException;
 import cn.sdadgz.dhc_springboot.entity.Img;
 import cn.sdadgz.dhc_springboot.mapper.ImgMapper;
 import cn.sdadgz.dhc_springboot.service.IImgService;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.io.File;
+import java.util.List;
 
 /**
  * <p>
@@ -55,5 +57,12 @@ public class ImgServiceImpl extends ServiceImpl<ImgMapper, Img> implements IImgS
         imgMapper.insert(img);
 
         return img;
+    }
+
+    @Override
+    public void deleteByEssayIds(List<Integer> ids) {
+        LambdaQueryWrapper<Img> wrapper = new LambdaQueryWrapper<>();
+        wrapper.in(Img::getEssayId,ids);
+        imgMapper.delete(wrapper);
     }
 }

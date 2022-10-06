@@ -45,6 +45,7 @@ public class Essay implements Serializable {
     @TableField(exist = false)
     private User user;
 
+    @JsonIgnore
     private String dir;
 
 }

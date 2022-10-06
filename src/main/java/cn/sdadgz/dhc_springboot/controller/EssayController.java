@@ -30,10 +30,7 @@ import java.awt.image.TileObserver;
 import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static cn.sdadgz.dhc_springboot.Utils.StringUtil.*;
 
@@ -76,8 +73,16 @@ public class EssayController {
 
     // 删除essay
     @DeleteMapping("")
-    public Result delete(@RequestParam("id")int id){
+    public Result delete(@RequestBody Map<String, List<Integer>> idMap) {
 
+        // 初始化
+        List<Integer> idList = idMap.get("idList");
+
+        // 物理删除，妈的可真长记性，把他放前面
+        FileUtil.deleteEssayByIds(idList);
+
+        // 数据库删除
+        essayService.deleteAllByIds(idList);
 
 
         return Result.success();

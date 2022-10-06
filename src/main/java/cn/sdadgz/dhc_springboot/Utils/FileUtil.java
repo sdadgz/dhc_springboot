@@ -1,14 +1,20 @@
 package cn.sdadgz.dhc_springboot.Utils;
 
 import cn.sdadgz.dhc_springboot.config.BusinessException;
+import cn.sdadgz.dhc_springboot.entity.Essay;
+import cn.sdadgz.dhc_springboot.mapper.EssayMapper;
+import cn.sdadgz.dhc_springboot.service.IEssayService;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 @Slf4j
 @Component
@@ -27,6 +33,9 @@ public class FileUtil {
 
     @Value("${my.file-config.downloadPath}")
     private String downloadPath;
+
+    @Resource
+    private IEssayService essayService;
 
     // 路径纠正
     public static String pathCorrect(String path) {
@@ -75,6 +84,15 @@ public class FileUtil {
             return fileName;
         }
         return fileName.substring(0, fileName.lastIndexOf('.'));
+    }
+
+    // 根据ids删除
+    public static void deleteEssayByIds(List<Integer> ids) {
+        List<Essay> essayList = fileUtil.essayService.getEssayByIds(ids);
+        essayList.forEach(item -> {
+            String dir = fileUtil.uploadPath + item.getDir();
+            deleteDir(dir);
+        });
     }
 
     // 删除文件夹

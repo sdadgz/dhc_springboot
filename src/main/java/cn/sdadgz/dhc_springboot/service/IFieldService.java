@@ -3,6 +3,7 @@ package cn.sdadgz.dhc_springboot.service;
 import cn.sdadgz.dhc_springboot.entity.Field;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,4 +24,7 @@ public interface IFieldService extends IService<Field> {
 
     // 根据field获取总数
     Long getCount(String field);
+
+    // 根据essayId删除
+    void deleteByEssayIds(List<Integer> ids);
 }

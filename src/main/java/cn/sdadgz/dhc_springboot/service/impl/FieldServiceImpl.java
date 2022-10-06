@@ -43,14 +43,14 @@ public class FieldServiceImpl extends ServiceImpl<FieldMapper, Field> implements
     public Map<String, Object> getField(String field, int currentPage, int pageSize) {
 
         // 初始化
-        Map<String,Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         int startPage = (currentPage - 1) * pageSize;
 
         List<Field> lists = fieldMapper.getAllByField(field, startPage, pageSize);
         Long total = getCount(field);
 
-        map.put(RESULT_LISTS,lists);
-        map.put(RESULT_TOTAL,total);
+        map.put(RESULT_LISTS, lists);
+        map.put(RESULT_TOTAL, total);
 
         return map;
     }
@@ -58,8 +58,15 @@ public class FieldServiceImpl extends ServiceImpl<FieldMapper, Field> implements
     @Override
     public Long getCount(String field) {
         LambdaQueryWrapper<Field> wrapper = new LambdaQueryWrapper<>();
-        wrapper.like(Field::getField,field);
+        wrapper.like(Field::getField, field);
         return fieldMapper.selectCount(wrapper);
+    }
+
+    @Override
+    public void deleteByEssayIds(List<Integer> ids) {
+        LambdaQueryWrapper<Field> wrapper = new LambdaQueryWrapper<>();
+        wrapper.in(Field::getEssayId, ids);
+        fieldMapper.delete(wrapper);
     }
 
 }
