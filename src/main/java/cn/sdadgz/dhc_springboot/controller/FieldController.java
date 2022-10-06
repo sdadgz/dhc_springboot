@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Nullable;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
@@ -41,5 +42,4 @@ public class FieldController {
 
         return Result.success(map);
     }
-
 }

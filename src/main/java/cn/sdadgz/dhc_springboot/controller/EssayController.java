@@ -17,6 +17,7 @@ import cn.sdadgz.dhc_springboot.service.IFieldService;
 import cn.sdadgz.dhc_springboot.service.IImgService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.springframework.beans.factory.annotation.Value;
@@ -71,6 +72,39 @@ public class EssayController {
 
     @Resource
     private UserMapper userMapper;
+
+    // 修改
+    @PutMapping("/update")
+    public Result update(@RequestParam(value = "title", required = false) String title,
+                         @RequestParam(value = "field", required = false) String field,
+                         @RequestParam("id") int id) {
+
+        // 遣返
+        if (title != null && field != null) {
+            throw new BusinessException("400", "bad request");
+        }
+
+        // 初始化
+        Map<String, Object> map = new HashMap<>();
+
+        if (title != null) {
+            // 修改标题
+            Essay essay = new Essay();
+            essay.setId(id);
+            essay.setTitle(title);
+            int i = essayMapper.updateById(essay);
+            map.put(RESULT_STATUS, i > 0);
+        } else if (field != null) {
+            // 修改领域
+            Field updateField = new Field();
+            updateField.setId(id);
+            updateField.setField(field);
+            int i = fieldMapper.updateById(updateField);
+            map.put(RESULT_STATUS, i > 0);
+        }
+
+        return Result.success(map);
+    }
 
     // 获取text
     @GetMapping("/text")
