@@ -1,9 +1,8 @@
 package cn.sdadgz.dhc_springboot.Utils;
 
-import javax.servlet.http.HttpServletRequest;
 import java.security.NoSuchAlgorithmException;
 
-import static cn.sdadgz.dhc_springboot.Utils.StringUtil.SALT;
+import static cn.sdadgz.dhc_springboot.Utils.MagicValueUtil.SALT;
 
 public class UserUtil {
 

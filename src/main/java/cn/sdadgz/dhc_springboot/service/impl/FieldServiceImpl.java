@@ -12,8 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static cn.sdadgz.dhc_springboot.Utils.StringUtil.RESULT_LISTS;
-import static cn.sdadgz.dhc_springboot.Utils.StringUtil.RESULT_TOTAL;
+import static cn.sdadgz.dhc_springboot.Utils.MagicValueUtil.RESULT_LISTS;
+import static cn.sdadgz.dhc_springboot.Utils.MagicValueUtil.RESULT_TOTAL;
 
 /**
  * <p>

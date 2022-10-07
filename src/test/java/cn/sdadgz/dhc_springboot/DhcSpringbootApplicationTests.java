@@ -3,6 +3,7 @@ package cn.sdadgz.dhc_springboot;
 import cn.sdadgz.dhc_springboot.Utils.FileUtil;
 import cn.sdadgz.dhc_springboot.Utils.JwtUtil;
 import cn.sdadgz.dhc_springboot.Utils.UserUtil;
+import cn.sdadgz.dhc_springboot.config.FileConfig;
 import cn.sdadgz.dhc_springboot.entity.Essay;
 import cn.sdadgz.dhc_springboot.entity.User;
 import cn.sdadgz.dhc_springboot.service.IEssayService;
@@ -35,12 +36,15 @@ class DhcSpringbootApplicationTests {
     @Resource
     private IUserService userService;
 
+    @Resource
+    private FileConfig fileConfig;
+
     @Test
     void contextLoads() {
 
     }
 
-    @Test
+    @Test // 获取token
     void getToken() throws NoSuchAlgorithmException {
         String union = "1";
         String token = JwtUtil.createToken(union, union, UserUtil.getPassword(union));

@@ -2,22 +2,16 @@ package cn.sdadgz.dhc_springboot.controller;
 
 import cn.sdadgz.dhc_springboot.Utils.DocxUtil;
 import cn.sdadgz.dhc_springboot.Utils.FileUtil;
-import cn.sdadgz.dhc_springboot.Utils.IdUtil;
-import cn.sdadgz.dhc_springboot.Utils.TimeUtil;
 import cn.sdadgz.dhc_springboot.common.Result;
 import cn.sdadgz.dhc_springboot.config.BusinessException;
 import cn.sdadgz.dhc_springboot.entity.Essay;
 import cn.sdadgz.dhc_springboot.entity.Field;
-import cn.sdadgz.dhc_springboot.entity.Img;
 import cn.sdadgz.dhc_springboot.mapper.EssayMapper;
 import cn.sdadgz.dhc_springboot.mapper.FieldMapper;
 import cn.sdadgz.dhc_springboot.mapper.UserMapper;
 import cn.sdadgz.dhc_springboot.service.IEssayService;
 import cn.sdadgz.dhc_springboot.service.IFieldService;
 import cn.sdadgz.dhc_springboot.service.IImgService;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,13 +20,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.awt.image.TileObserver;
-import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
-import static cn.sdadgz.dhc_springboot.Utils.StringUtil.*;
+import static cn.sdadgz.dhc_springboot.Utils.MagicValueUtil.*;
 
 /**
  * <p>

@@ -8,23 +8,40 @@ public class IdUtil {
 
     // uuid
     public static String uuid() throws NoSuchAlgorithmException {
-        // 时间加伪随机数
-        String time = String.valueOf(System.currentTimeMillis());
-        Random rand = new Random();
-        String randStr = String.valueOf(rand.nextInt((int) (1e6)));
-        // 转36进制
-        long num = Long.parseLong(time + randStr);
-        return Md5Util.md5(Long.toString(num, 36));
+        return uuid(MagicValueUtil.SALT);
+    }
+
+    // uuid加盐重写
+    public static String uuid(String salt) throws NoSuchAlgorithmException {
+        // 时间
+        long currentTimeMillis = System.currentTimeMillis();
+        String time = String.valueOf(currentTimeMillis);
+        // 随机数
+        Random random = new Random();
+        long l = random.nextLong();
+        String rand = String.valueOf(l);
+
+        return Md5Util.md5(time + rand + salt);
     }
 
     // 获取userId
     public static int getId(HttpServletRequest request) {
-        return Integer.parseInt(JwtUtil.getAudience(request.getHeader("token")));
+        return getId(request.getHeader("token"));
+    }
+
+    // 获取userId
+    public static int getId(String token) {
+        return Integer.parseInt(JwtUtil.getAudience(token));
     }
 
     // 获取username
     public static String getName(HttpServletRequest request) {
-        return JwtUtil.getClaimByName(request.getHeader("token"), "username").asString();
+        return getName(request.getHeader("token"));
+    }
+
+    // 获取username
+    public static String getName(String token) {
+        return JwtUtil.getClaimByName(token, "username").asString();
     }
 
 }

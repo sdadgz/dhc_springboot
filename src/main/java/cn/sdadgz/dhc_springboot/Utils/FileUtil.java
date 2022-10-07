@@ -6,12 +6,15 @@ import cn.sdadgz.dhc_springboot.mapper.EssayMapper;
 import cn.sdadgz.dhc_springboot.service.IEssayService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.extern.slf4j.Slf4j;
+import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -69,6 +72,9 @@ public class FileUtil {
 
     // 获取拓展名
     public static String getType(String fileName) {
+        if (fileName == null) {
+            throw new BusinessException("573", "获取不到文件名");
+        }
         if (!fileName.contains(".")) {
             return "";
         }
@@ -122,6 +128,48 @@ public class FileUtil {
             }
         }
         return file.delete();
+    }
+
+    // 设置浓缩图 返回url 附默认值
+    public static String setReduceImg(File file) throws IOException {
+        return setReduceImg(file, MagicValueUtil.REDUCE_X, MagicValueUtil.REDUCE_Y);
+    }
+
+    // 设置浓缩图 返回url 防止空指针异常
+    public static String setReduceImg(File file, Integer x, Integer y) throws IOException {
+        return setReduceImg(file, x == null ? Integer.MAX_VALUE : x, y == null ? Integer.MAX_VALUE : y);
+    }
+
+    // 设置浓缩图 返回url
+    public static String setReduceImg(File file, int reduceX, int reduceY) throws IOException {
+
+        // 浓缩图路径
+        String reducePath = file.getPath() + ".jpg";
+
+        // 获取类型
+        String name = reducePath.substring(fileUtil.uploadPath.length());
+        String fileName = file.getName();
+        String type = getType(fileName);
+        if (containsType(type)) {
+
+            // 压缩
+            Thumbnails.of(file).size(reduceX, reduceY).toFile(reducePath);
+
+            // 返回路径
+            return fileUtil.downloadPath + name;
+        }
+
+        return null;
+    }
+
+    // 包含可处理图片
+    private static boolean containsType(String type) {
+        for (String s : MagicValueUtil.IMG_SUPPORT_TYPE) {
+            if (type.equals(s)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

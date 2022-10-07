@@ -4,7 +4,6 @@ import cn.sdadgz.dhc_springboot.config.BusinessException;
 import cn.sdadgz.dhc_springboot.entity.Essay;
 import cn.sdadgz.dhc_springboot.entity.Img;
 import cn.sdadgz.dhc_springboot.mapper.EssayMapper;
-import cn.sdadgz.dhc_springboot.service.IEssayService;
 import cn.sdadgz.dhc_springboot.service.IImgService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
@@ -30,7 +29,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static cn.sdadgz.dhc_springboot.Utils.StringUtil.*;
+import static cn.sdadgz.dhc_springboot.Utils.MagicValueUtil.*;
 
 @Slf4j
 @Component
@@ -124,7 +123,7 @@ public class DocxUtil {
     // 上传的文件类型是否支持
     private static boolean isSupport(String filename) {
         String type = FileUtil.getType(filename);
-        for (String s : SUPPORT_TYPE) {
+        for (String s : ESSAY_SUPPORT_TYPE) {
             if (type.equals(s)) {
                 return true;
             }
