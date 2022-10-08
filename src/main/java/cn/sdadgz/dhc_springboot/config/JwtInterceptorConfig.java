@@ -18,7 +18,6 @@ public class JwtInterceptorConfig implements WebMvcConfigurer {
         registry.addInterceptor(interceptor).addPathPatterns("/**").order(-1) // 似乎是小的先走
                 .excludePathPatterns(
                         "/user/login", // 用户登录
-                        "/user/register", // 用户注册
                         "/essay/text", // 显示的html
                         "/essay/page", // 获取分页
                         "/static/**");

@@ -54,8 +54,14 @@ public class DocxUtil {
     @Resource
     private IImgService imgService;
 
+    // 上传essay
+    public static Essay upload(MultipartFile file, HttpServletRequest request) throws IOException, NoSuchAlgorithmException, Docx4JException {
+        String name = file.getName();
+        return upload(file, request, name);
+    }
+
     // 封装的上传
-    public static Essay upload(MultipartFile file, HttpServletRequest request) throws IOException, Docx4JException, NoSuchAlgorithmException {
+    public static Essay upload(MultipartFile file, HttpServletRequest request, String requestTitle) throws IOException, Docx4JException, NoSuchAlgorithmException {
         // 初始化
         Essay essay = new Essay();
         essay.setCreateTime(TimeUtil.now());
@@ -74,9 +80,8 @@ public class DocxUtil {
         }
 
         // 标题和用户id
-        String title = FileUtil.getName(originalFilename);
         int userId = IdUtil.getId(request);
-        essay.setTitle(title);
+        essay.setTitle(requestTitle);
         essay.setUserId(userId);
 
         // 创建文件夹
@@ -89,7 +94,7 @@ public class DocxUtil {
 
         // 前端传的文件搞本地上
         String path = basePath + originalFilename;
-        String htmlPath = basePath + title + HTML_SUFFIX;
+        String htmlPath = basePath + requestTitle + HTML_SUFFIX;
         FileUtil.uploadToServer(file, path);
         docxUtil.essayMapper.insert(essay);
 

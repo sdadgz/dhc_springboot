@@ -4,10 +4,11 @@
 
     <select id="getAllByField" resultMap="FieldMap">
         select *
-        from field
-                 inner join essay e on e.id = field.essay_id
+        from field f
+                 inner join essay e on e.id = f.essay_id
                  inner join user u on e.user_id = u.id
-        where field like CONCAT('%', #{field}, '%')
+        where f.field like CONCAT('%', #{field}, '%')
+        order by e.create_time desc, f.id desc
         limit #{startPage}, #{pageSize}
     </select>
 

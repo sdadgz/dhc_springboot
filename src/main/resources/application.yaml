@@ -40,3 +40,12 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     auto-mapping-behavior: full
   type-aliases-package: cn.sdadgz.dhc_springboot.entity
+
+#日志
+logging:
+  level:
+    root: info
+  file:
+    name: test.log
+    max-size: 10MB
+    clean-history-on-start: true

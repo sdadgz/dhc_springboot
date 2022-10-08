@@ -153,7 +153,35 @@ public class ImgServiceImpl extends ServiceImpl<ImgMapper, Img> implements IImgS
         // 查询
         LambdaQueryWrapper<Img> wrapper = new LambdaQueryWrapper<>();
         wrapper.in(Img::getId, ids);
-        imgMapper.update(img,wrapper);
+        imgMapper.update(img, wrapper);
+    }
+
+    // 分页
+    @Override
+    public Map<String, Object> getPage(int currentPage, int pageSize) {
+
+        // 初始化
+        Map<String, Object> map = new HashMap<>();
+        int startPage = (currentPage - 1) * pageSize;
+        Integer essayId = MagicValueUtil.DEFAULT_ESSAY_ID;
+
+        // 获取分页
+        List<Img> lists = imgMapper.getPage(essayId, startPage, pageSize);
+
+        // 获取总数
+        long total = count(essayId);
+
+        map.put(MagicValueUtil.RESULT_LISTS, lists);
+        map.put(MagicValueUtil.RESULT_TOTAL, total);
+
+        return map;
+    }
+
+    @Override
+    public long count(Integer essayId) {
+        LambdaQueryWrapper<Img> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(essayId != null, Img::getEssayId, essayId);
+        return imgMapper.selectCount(wrapper);
     }
 
 }

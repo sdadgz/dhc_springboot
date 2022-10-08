@@ -158,13 +158,17 @@ public class EssayController {
     @PostMapping("/upload")
     public Result upload(@RequestPart("file") MultipartFile file,
                          @RequestParam("field") String field,
+                         @RequestParam(value = "title", required = false) String title,
                          HttpServletRequest request) throws IOException, Docx4JException, NoSuchAlgorithmException {
 
         // 初始化
         Map<String, Object> map = new HashMap<>();
 
         // 处理docx
-        Essay essay = DocxUtil.upload(file, request);
+        if (title == null || title.length() < 1) {
+            title = file.getName();
+        }
+        Essay essay = DocxUtil.upload(file, request, title);
         map.put("essay", essay);
 
         // 增加领域

@@ -3,6 +3,7 @@ package cn.sdadgz.dhc_springboot.service;
 import cn.sdadgz.dhc_springboot.entity.Img;
 import com.baomidou.mybatisplus.extension.service.IService;
 import io.swagger.models.auth.In;
+import lombok.extern.java.Log;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -34,5 +35,11 @@ public interface IImgService extends IService<Img> {
 
     // 删除图片
     void deleteImg(List<Integer> ids);
+
+    // 获取分页
+    Map<String,Object> getPage(int currentPage,int pageSize);
+
+    // 数数
+    long count(Integer essayId);
 
 }
