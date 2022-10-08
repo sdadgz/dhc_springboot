@@ -2,6 +2,7 @@ package cn.sdadgz.dhc_springboot.controller;
 
 import cn.sdadgz.dhc_springboot.Utils.DocxUtil;
 import cn.sdadgz.dhc_springboot.Utils.FileUtil;
+import cn.sdadgz.dhc_springboot.Utils.MagicValueUtil;
 import cn.sdadgz.dhc_springboot.common.Result;
 import cn.sdadgz.dhc_springboot.config.BusinessException;
 import cn.sdadgz.dhc_springboot.entity.Essay;
@@ -68,7 +69,7 @@ public class EssayController {
     public Result delete(@RequestBody Map<String, List<Integer>> idMap) {
 
         // 初始化
-        List<Integer> idList = idMap.get("idList");
+        List<Integer> idList = idMap.get(RESULT_LISTS);
 
         // 物理删除，妈的可真长记性，把他放前面
         FileUtil.deleteEssayByIds(idList);

@@ -69,6 +69,7 @@ public class ImgServiceImpl extends ServiceImpl<ImgMapper, Img> implements IImgS
         return img;
     }
 
+    // 根据id批量删除
     @Override
     public void deleteByEssayIds(List<Integer> ids) {
         LambdaQueryWrapper<Img> wrapper = new LambdaQueryWrapper<>();
@@ -76,6 +77,7 @@ public class ImgServiceImpl extends ServiceImpl<ImgMapper, Img> implements IImgS
         imgMapper.delete(wrapper);
     }
 
+    // md5是否存在
     @Override
     public Img md5Exists(String md5) {
 
@@ -87,6 +89,7 @@ public class ImgServiceImpl extends ServiceImpl<ImgMapper, Img> implements IImgS
         return imgs.size() > 0 ? imgs.get(0) : null;
     }
 
+    // 上传图片
     @Override
     public Map<String, Object> uploadImg(MultipartFile file, Integer reduceX, Integer reduceY, String token) throws IOException, NoSuchAlgorithmException {
         // 初始化
@@ -138,4 +141,19 @@ public class ImgServiceImpl extends ServiceImpl<ImgMapper, Img> implements IImgS
 
         return map;
     }
+
+    // 虚拟批量删除
+    @Override
+    public void deleteImg(List<Integer> ids) {
+
+        // 图片
+        Img img = new Img();
+        img.setIsDelete(true);
+
+        // 查询
+        LambdaQueryWrapper<Img> wrapper = new LambdaQueryWrapper<>();
+        wrapper.in(Img::getId, ids);
+        imgMapper.update(img,wrapper);
+    }
+
 }

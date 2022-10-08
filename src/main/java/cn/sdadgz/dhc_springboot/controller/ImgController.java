@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,6 +41,7 @@ public class ImgController {
     @Resource
     private ImgMapper imgMapper;
 
+    // 上传图片
     @PostMapping("/upload")
     public Result upload(@RequestPart("file") MultipartFile file,
                          @RequestParam(value = "reduceX", required = false) Integer reduceX,
@@ -49,6 +51,16 @@ public class ImgController {
         Map<String, Object> map = imgService.uploadImg(file, reduceX, reduceY, token);
 
         return Result.success(map);
+    }
+
+    // 虚拟删除图片
+    @DeleteMapping("")
+    public Result delete(@RequestBody Map<String, List<Integer>> requestMap){
+
+        List<Integer> idList = requestMap.get(MagicValueUtil.RESULT_LISTS);
+        imgService.deleteImg(idList);
+
+        return Result.success();
     }
 
 }

@@ -137,6 +137,9 @@ public class FileUtil {
 
     // 设置浓缩图 返回url 防止空指针异常
     public static String setReduceImg(File file, Integer x, Integer y) throws IOException {
+        if (x == null && y == null){
+            return setReduceImg(file);
+        }
         return setReduceImg(file, x == null ? Integer.MAX_VALUE : x, y == null ? Integer.MAX_VALUE : y);
     }
 
@@ -156,7 +159,7 @@ public class FileUtil {
             Thumbnails.of(file).size(reduceX, reduceY).toFile(reducePath);
 
             // 返回路径
-            return fileUtil.downloadPath + name;
+            return toUrl(reducePath);
         }
 
         return null;

@@ -2,6 +2,7 @@ package cn.sdadgz.dhc_springboot.service;
 
 import cn.sdadgz.dhc_springboot.entity.Img;
 import com.baomidou.mybatisplus.extension.service.IService;
+import io.swagger.models.auth.In;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -30,5 +31,8 @@ public interface IImgService extends IService<Img> {
 
     // 上传图片
     Map<String,Object> uploadImg(MultipartFile file,Integer reduceX,Integer reduceY,String token) throws IOException, NoSuchAlgorithmException;
+
+    // 删除图片
+    void deleteImg(List<Integer> ids);
 
 }
