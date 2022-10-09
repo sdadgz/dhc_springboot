@@ -11,7 +11,7 @@ public class MagicValueUtil {
     public static final String RESULT_TEXT = "text";
     public static final String RESULT_ESSAY = "essay";
     public static final String RESULT_STATUS = "status";
-    public static final String RESULT_ID_LIST = "idList";
+    public static final String REQUEST_LISTS = "idList";
 
     public static final String[] ESSAY_SUPPORT_TYPE = {".docx"}; // 支持的文件类型
     public static final String HTML_SUFFIX = ".html"; // html文件后缀

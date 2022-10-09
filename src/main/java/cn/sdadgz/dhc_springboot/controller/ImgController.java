@@ -68,7 +68,7 @@ public class ImgController {
     @DeleteMapping("")
     public Result delete(@RequestBody Map<String, List<Integer>> requestMap) {
 
-        List<Integer> idList = requestMap.get(MagicValueUtil.RESULT_LISTS);
+        List<Integer> idList = requestMap.get(MagicValueUtil.REQUEST_LISTS);
         imgService.deleteImg(idList);
 
         return Result.success();
