@@ -34,7 +34,7 @@ public interface IImgService extends IService<Img> {
     Map<String,Object> uploadImg(MultipartFile file,Integer reduceX,Integer reduceY,String token) throws IOException, NoSuchAlgorithmException;
 
     // 删除图片
-    void deleteImg(List<Integer> ids);
+    void updateIsDelete(List<Integer> ids, boolean status);
 
     // 获取分页
     Map<String,Object> getPage(int currentPage,int pageSize);

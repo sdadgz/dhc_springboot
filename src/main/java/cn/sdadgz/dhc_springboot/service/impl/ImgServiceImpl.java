@@ -142,13 +142,13 @@ public class ImgServiceImpl extends ServiceImpl<ImgMapper, Img> implements IImgS
         return map;
     }
 
-    // 虚拟批量删除
+    // 虚拟批量删除·改
     @Override
-    public void deleteImg(List<Integer> ids) {
+    public void updateIsDelete(List<Integer> ids, boolean status) {
 
         // 图片
         Img img = new Img();
-        img.setIsDelete(true);
+        img.setIsDelete(status);
 
         // 查询
         LambdaQueryWrapper<Img> wrapper = new LambdaQueryWrapper<>();

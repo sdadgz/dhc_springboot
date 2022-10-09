@@ -3,20 +3,15 @@ package cn.sdadgz.dhc_springboot.controller;
 import cn.sdadgz.dhc_springboot.Utils.*;
 import cn.sdadgz.dhc_springboot.common.Result;
 import cn.sdadgz.dhc_springboot.config.FileConfig;
-import cn.sdadgz.dhc_springboot.entity.Img;
 import cn.sdadgz.dhc_springboot.mapper.ImgMapper;
 import cn.sdadgz.dhc_springboot.service.IImgService;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -69,7 +64,17 @@ public class ImgController {
     public Result delete(@RequestBody Map<String, List<Integer>> requestMap) {
 
         List<Integer> idList = requestMap.get(MagicValueUtil.REQUEST_LISTS);
-        imgService.deleteImg(idList);
+        imgService.updateIsDelete(idList, true);
+
+        return Result.success();
+    }
+
+    // 图片恢复
+    @PutMapping("")
+    public Result recover(@RequestBody Map<String, List<Integer>> requestMap) {
+
+        List<Integer> idList = requestMap.get(MagicValueUtil.REQUEST_LISTS);
+        imgService.updateIsDelete(idList, false);
 
         return Result.success();
     }
