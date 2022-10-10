@@ -9,7 +9,11 @@
             <if test="essayId != null">
                 essay_id = #{essayId}
             </if>
+            <if test="title != null">
+                and i.title like CONCAT('%', #{title}, '%')
+            </if>
         </where>
+        order by i.create_time desc, i.id desc
         limit #{startPage}, #{pageSize}
     </select>
 

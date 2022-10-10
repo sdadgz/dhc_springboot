@@ -163,7 +163,7 @@ public class ImgServiceImpl extends ServiceImpl<ImgMapper, Img> implements IImgS
 
     // 分页
     @Override
-    public Map<String, Object> getPage(int currentPage, int pageSize) {
+    public Map<String, Object> getPage(int currentPage, int pageSize, String title) {
 
         // 初始化
         Map<String, Object> map = new HashMap<>();
@@ -171,7 +171,7 @@ public class ImgServiceImpl extends ServiceImpl<ImgMapper, Img> implements IImgS
         Integer essayId = MagicValueUtil.DEFAULT_ESSAY_ID;
 
         // 获取分页
-        List<Img> lists = imgMapper.getPage(essayId, startPage, pageSize);
+        List<Img> lists = imgMapper.getPage(essayId, startPage, pageSize,title);
 
         // 获取总数
         long total = count(essayId);

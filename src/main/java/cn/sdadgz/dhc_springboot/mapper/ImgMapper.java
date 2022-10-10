@@ -21,6 +21,7 @@ public interface ImgMapper extends BaseMapper<Img> {
     // 根据essayId获取img
     List<Img> getPage(@Param("essayId") Integer essayId,
                       @Param("startPage") int startPage,
-                      @Param("pageSize") int pageSize);
+                      @Param("pageSize") int pageSize,
+                      @Param("title") String title);
 
 }

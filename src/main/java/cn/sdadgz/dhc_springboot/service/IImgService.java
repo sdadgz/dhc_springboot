@@ -41,7 +41,7 @@ public interface IImgService extends IService<Img> {
     void updateIsDelete(List<Integer> ids, boolean status);
 
     // 获取分页
-    Map<String,Object> getPage(int currentPage,int pageSize);
+    Map<String,Object> getPage(int currentPage,int pageSize,String title);
 
     // 数数
     long count(Integer essayId);

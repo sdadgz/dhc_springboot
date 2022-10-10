@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -40,9 +41,10 @@ public class ImgController {
     // 获取图片
     @GetMapping("/page")
     public Result getPage(@RequestParam("currentPage") int currentPage,
-                          @RequestParam("pageSize") int pageSize) {
+                          @RequestParam("pageSize") int pageSize,
+                          @RequestParam(value = "title", required = false) String title) {
 
-        Map<String, Object> map = imgService.getPage(currentPage, pageSize);
+        Map<String, Object> map = imgService.getPage(currentPage, pageSize, (Objects.equals(title, MagicValueUtil.EMPTY_STRING) ? null : title));
 
         return Result.success(map);
     }

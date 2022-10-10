@@ -2,4 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.sdadgz.dhc_springboot.mapper.CarouselMapper">
 
+    <select id="getPage" resultMap="CarouselMap">
+        select *
+        from carousel c
+        inner join essay e on e.id = c.essay_id
+        inner join img i on c.img_id = i.id
+        <where>
+            <if test="title != null">
+                e.title like CONCAT('%', #{title}, '%')
+            </if>
+        </where>
+        order by e.create_time desc, c.id desc
+        limit #{startPage}, #{pageSize}
+    </select>
+
+    <select id="getCount" resultType="java.lang.Long">
+        select count(*)
+        from carousel c
+        <if test="title != null">
+            where c.essay_id in (select e.id from essay e where e.title = #{title})
+        </if>
+    </select>
+
+    <resultMap id="CarouselMap" type="carousel">
+        <association property="essay" javaType="essay"/>
+        <association property="img" javaType="img"/>
+    </resultMap>
+
 </mapper>

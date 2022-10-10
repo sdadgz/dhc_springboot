@@ -6,6 +6,7 @@ import cn.sdadgz.dhc_springboot.Utils.UserUtil;
 import cn.sdadgz.dhc_springboot.config.FileConfig;
 import cn.sdadgz.dhc_springboot.entity.Essay;
 import cn.sdadgz.dhc_springboot.entity.User;
+import cn.sdadgz.dhc_springboot.service.ICarouselService;
 import cn.sdadgz.dhc_springboot.service.IEssayService;
 import cn.sdadgz.dhc_springboot.service.IUserService;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
@@ -39,6 +40,9 @@ class DhcSpringbootApplicationTests {
     @Resource
     private FileConfig fileConfig;
 
+    @Resource
+    private ICarouselService carouselService;
+
     @Test
     void contextLoads() {
 
@@ -49,6 +53,15 @@ class DhcSpringbootApplicationTests {
         String union = "1";
         String token = JwtUtil.createToken(union, union, UserUtil.getPassword(union));
         System.out.println(token);
+    }
+
+    @Test
+    void getPage(){
+        int currentPage = 1;
+        int pageSize = 10;
+        String title = null;
+        Map<String, Object> page = carouselService.getPage(currentPage, pageSize, null);
+        System.out.println(page);
     }
 
 }
