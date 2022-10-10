@@ -42,4 +42,6 @@ public class Img implements Serializable {
 
     @JsonIgnore
     private Integer essayId;
+
+    private String title;
 }

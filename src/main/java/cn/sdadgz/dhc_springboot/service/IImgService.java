@@ -31,7 +31,11 @@ public interface IImgService extends IService<Img> {
     Img md5Exists(String md5);
 
     // 上传图片
-    Map<String,Object> uploadImg(MultipartFile file,Integer reduceX,Integer reduceY,String token) throws IOException, NoSuchAlgorithmException;
+    Map<String,Object> uploadImg(MultipartFile file,
+                                 Integer reduceX,
+                                 Integer reduceY,
+                                 String title,
+                                 String token) throws IOException, NoSuchAlgorithmException;
 
     // 删除图片
     void updateIsDelete(List<Integer> ids, boolean status);

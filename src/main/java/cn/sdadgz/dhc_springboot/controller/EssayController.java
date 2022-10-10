@@ -69,7 +69,7 @@ public class EssayController {
     public Result delete(@RequestBody Map<String, List<Integer>> idMap) {
 
         // 初始化
-        List<Integer> idList = idMap.get(RESULT_LISTS);
+        List<Integer> idList = idMap.get(REQUEST_LISTS);
 
         // 物理删除，妈的可真长记性，把他放前面
         FileUtil.deleteEssayByIds(idList);

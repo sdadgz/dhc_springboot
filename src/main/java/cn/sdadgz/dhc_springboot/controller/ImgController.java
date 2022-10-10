@@ -52,9 +52,10 @@ public class ImgController {
     public Result upload(@RequestPart("file") MultipartFile file,
                          @RequestParam(value = "reduceX", required = false) Integer reduceX,
                          @RequestParam(value = "reduceY", required = false) Integer reduceY,
+                         @RequestParam(value = "title", required = false) String title,
                          @RequestHeader("token") String token) throws NoSuchAlgorithmException, IOException {
 
-        Map<String, Object> map = imgService.uploadImg(file, reduceX, reduceY, token);
+        Map<String, Object> map = imgService.uploadImg(file, reduceX, reduceY, title, token);
 
         return Result.success(map);
     }

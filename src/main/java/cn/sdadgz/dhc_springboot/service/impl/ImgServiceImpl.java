@@ -91,11 +91,16 @@ public class ImgServiceImpl extends ServiceImpl<ImgMapper, Img> implements IImgS
 
     // 上传图片
     @Override
-    public Map<String, Object> uploadImg(MultipartFile file, Integer reduceX, Integer reduceY, String token) throws IOException, NoSuchAlgorithmException {
+    public Map<String, Object> uploadImg(MultipartFile file,
+                                         Integer reduceX,
+                                         Integer reduceY,
+                                         String title,
+                                         String token) throws IOException, NoSuchAlgorithmException {
         // 初始化
         Img img = new Img();
         img.setCreateTime(TimeUtil.now());
         img.setEssayId(MagicValueUtil.DEFAULT_ESSAY_ID);
+        img.setTitle(title);
         Map<String, Object> map = new HashMap<>();
 
         // uuid
