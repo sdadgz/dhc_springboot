@@ -5,10 +5,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author sdadgz
@@ -20,6 +21,9 @@ public interface ICarouselService extends IService<Carousel> {
     void deleteByEssayIds(List<Integer> idList);
 
     // 获取分页
-    Map<String,Object> getPage(int currentPage,int pageSize,String title);
+    Map<String, Object> getPage(int currentPage, int pageSize, String title) throws ExecutionException, InterruptedException;
+
+    // 获取全部
+    List<Carousel> getAll();
 
 }

@@ -55,13 +55,4 @@ class DhcSpringbootApplicationTests {
         System.out.println(token);
     }
 
-    @Test
-    void getPage(){
-        int currentPage = 1;
-        int pageSize = 10;
-        String title = null;
-        Map<String, Object> page = carouselService.getPage(currentPage, pageSize, null);
-        System.out.println(page);
-    }
-
 }

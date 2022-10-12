@@ -166,7 +166,7 @@ public class EssayController {
 
         // 处理docx
         if (title == null || title.length() < 1) {
-            title = file.getName();
+            title = FileUtil.getName(file.getOriginalFilename());
         }
         Essay essay = DocxUtil.upload(file, request, title);
         map.put("essay", essay);

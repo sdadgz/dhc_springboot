@@ -13,6 +13,7 @@ import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 /**
  * <p>
@@ -37,7 +38,7 @@ public class CarouselServiceImpl extends ServiceImpl<CarouselMapper, Carousel> i
     }
 
     @Override
-    public Map<String, Object> getPage(int currentPage, int pageSize, String title) {
+    public Map<String, Object> getPage(int currentPage, int pageSize, String title) throws ExecutionException, InterruptedException {
 
         // 初始化
         Map<String, Object> map = new HashMap<>();
@@ -53,6 +54,11 @@ public class CarouselServiceImpl extends ServiceImpl<CarouselMapper, Carousel> i
         map.put(MagicValueUtil.RESULT_TOTAL, total);
 
         return map;
+    }
+
+    @Override
+    public List<Carousel> getAll() {
+        return carouselMapper.getAllCarousel();
     }
 
 }

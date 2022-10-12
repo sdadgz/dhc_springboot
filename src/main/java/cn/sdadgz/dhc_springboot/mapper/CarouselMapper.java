@@ -4,9 +4,11 @@ import cn.sdadgz.dhc_springboot.entity.Carousel;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.scheduling.annotation.Async;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Future;
 
 /**
  * <p>
@@ -26,5 +28,8 @@ public interface CarouselMapper extends BaseMapper<Carousel> {
 
     // 获取总数
     long getCount(@Param("title") String title);
+
+    // 获取全部轮播图
+    List<Carousel> getAllCarousel();
 
 }

@@ -24,6 +24,14 @@
         </if>
     </select>
 
+    <select id="getAllCarousel" resultMap="CarouselMap">
+        select *
+        from carousel c
+                 inner join essay e on c.essay_id = e.id
+                 inner join img i on c.img_id = i.id
+        order by e.create_time desc, c.id desc
+    </select>
+
     <resultMap id="CarouselMap" type="carousel">
         <association property="essay" javaType="essay"/>
         <association property="img" javaType="img"/>

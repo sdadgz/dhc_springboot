@@ -20,6 +20,8 @@ public class JwtInterceptorConfig implements WebMvcConfigurer {
                         "/user/login", // 用户登录
                         "/essay/text", // 显示的html
                         "/essay/page", // 获取分页
+                        "/carousel/page", // 获取轮播图分页
+                        "/carousel", // 获取全部轮播图
                         "/static/**");
     }
 
