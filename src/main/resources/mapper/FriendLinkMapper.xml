@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sdadgz.dhc_springboot.mapper.FriendLinkMapper">
+
+    <select id="getPage" resultMap="IMap">
+        select *
+        from friend_link fl
+                 inner join img i on fl.img_id = i.id
+        limit #{startPage}, #{pageSize}
+    </select>
+
+    <resultMap id="IMap" type="friendLink">
+        <association property="img" javaType="img"/>
+    </resultMap>
+</mapper>
