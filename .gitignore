@@ -35,6 +35,7 @@ build/
 ### log ###
 *.log
 *.gz
+*.tmp
 
 ### password ###
 src/main/resources/application.properties

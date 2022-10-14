@@ -29,6 +29,15 @@ public class FriendLinkController {
     @Resource
     private IFriendLinkService friendLinkService;
 
+    // 更新
+    @PutMapping("/update")
+    public Result update(@RequestBody FriendLink friendLink){
+
+        friendLinkMapper.updateById(friendLink);
+
+        return Result.success();
+    }
+
     // 上传
     @PostMapping("/upload")
     public Result upload(@RequestBody FriendLink friendLink) {
