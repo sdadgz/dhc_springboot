@@ -40,6 +40,19 @@ public class FileUtil {
     @Resource
     private IEssayService essayService;
 
+    // 根据url删除文件
+    public static void deleteFileByUrl(String... url) {
+        for (String s : url) {
+            if (s != null && s.contains(fileUtil.downloadPath)) {
+                String path = s.substring(fileUtil.downloadPath.length());
+                path = fileUtil.uploadPath + path;
+                File file = new File(path);
+                boolean delete = file.delete();
+                log.info("删除文件{},{}", path, delete ? "成功" : "失败");
+            }
+        }
+    }
+
     // 路径纠正
     public static String pathCorrect(String path) {
         return path.replace('\\', '/');
@@ -137,7 +150,7 @@ public class FileUtil {
 
     // 设置浓缩图 返回url 防止空指针异常
     public static String setReduceImg(File file, Integer x, Integer y) throws IOException {
-        if (x == null && y == null){
+        if (x == null && y == null) {
             return setReduceImg(file);
         }
         return setReduceImg(file, x == null ? Integer.MAX_VALUE : x, y == null ? Integer.MAX_VALUE : y);
@@ -154,6 +167,14 @@ public class FileUtil {
         String fileName = file.getName();
         String type = getType(fileName);
         if (containsType(type)) {
+            BufferedImage image = ImageIO.read(file);
+            int height = image.getHeight();
+            int width = image.getWidth();
+            if (width / height > reduceX / reduceY) {
+                reduceX = width;
+            } else {
+                reduceY = height;
+            }
 
             // 压缩
             Thumbnails.of(file).size(reduceX, reduceY).toFile(reducePath);

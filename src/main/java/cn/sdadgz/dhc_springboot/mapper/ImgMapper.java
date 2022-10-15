@@ -24,4 +24,7 @@ public interface ImgMapper extends BaseMapper<Img> {
                       @Param("pageSize") int pageSize,
                       @Param("title") String title);
 
+    // 获取需要删除的img
+    List<Img> getDeleteImgs();
+
 }

@@ -5,9 +5,12 @@ import cn.sdadgz.dhc_springboot.Utils.JwtUtil;
 import cn.sdadgz.dhc_springboot.Utils.UserUtil;
 import cn.sdadgz.dhc_springboot.config.FileConfig;
 import cn.sdadgz.dhc_springboot.entity.Essay;
+import cn.sdadgz.dhc_springboot.entity.Img;
 import cn.sdadgz.dhc_springboot.entity.User;
+import cn.sdadgz.dhc_springboot.mapper.ImgMapper;
 import cn.sdadgz.dhc_springboot.service.ICarouselService;
 import cn.sdadgz.dhc_springboot.service.IEssayService;
+import cn.sdadgz.dhc_springboot.service.IImgService;
 import cn.sdadgz.dhc_springboot.service.IUserService;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFPictureData;
@@ -43,12 +46,19 @@ class DhcSpringbootApplicationTests {
     @Resource
     private ICarouselService carouselService;
 
+    @Resource
+    private ImgMapper imgMapper;
+
+    @Resource
+    private IImgService imgService;
+
     @Test
     void contextLoads() {
 
     }
 
-    @Test // 获取token
+    @Test
+        // 获取token
     void getToken() throws NoSuchAlgorithmException {
         String union = "1";
         String token = JwtUtil.createToken(union, union, UserUtil.getPassword(union));

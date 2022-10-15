@@ -3,13 +3,16 @@
 <mapper namespace="cn.sdadgz.dhc_springboot.mapper.FriendLinkMapper">
 
     <select id="getPage" resultMap="IMap">
-        select *
+        select *, i.url iurl
         from friend_link fl
                  inner join img i on fl.img_id = i.id
+        order by fl.id desc
         limit #{startPage}, #{pageSize}
     </select>
 
     <resultMap id="IMap" type="friendLink">
-        <association property="img" javaType="img"/>
+        <association property="img" javaType="img">
+            <result column="iurl" property="url"/>
+        </association>
     </resultMap>
 </mapper>

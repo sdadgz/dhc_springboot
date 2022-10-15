@@ -46,4 +46,7 @@ public interface IImgService extends IService<Img> {
     // 数数
     long count(Integer essayId);
 
+    // 根据MD5删除
+    void deleteByMD5(List<Img> imgs);
+
 }

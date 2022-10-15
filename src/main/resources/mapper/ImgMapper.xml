@@ -17,4 +17,11 @@
         limit #{startPage}, #{pageSize}
     </select>
 
+    <select id="getDeleteImgs" resultType="img">
+        select i.md5, min(i.is_delete) iis_delete, max(i.url) as url, max(i.reduce_url) as reduce_url
+        from img i
+        group by i.md5
+        having iis_delete = 1
+    </select>
+
 </mapper>

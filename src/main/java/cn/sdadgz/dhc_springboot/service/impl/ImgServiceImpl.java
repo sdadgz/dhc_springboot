@@ -17,10 +17,7 @@ import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -171,7 +168,7 @@ public class ImgServiceImpl extends ServiceImpl<ImgMapper, Img> implements IImgS
         Integer essayId = MagicValueUtil.DEFAULT_ESSAY_ID;
 
         // 获取分页
-        List<Img> lists = imgMapper.getPage(essayId, startPage, pageSize,title);
+        List<Img> lists = imgMapper.getPage(essayId, startPage, pageSize, title);
 
         // 获取总数
         long total = count(essayId);
@@ -187,6 +184,20 @@ public class ImgServiceImpl extends ServiceImpl<ImgMapper, Img> implements IImgS
         LambdaQueryWrapper<Img> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(essayId != null, Img::getEssayId, essayId);
         return imgMapper.selectCount(wrapper);
+    }
+
+    @Override
+    public void deleteByMD5(List<Img> imgs) {
+
+        List<String> arr = new ArrayList<>();
+        for (Img img : imgs) {
+            arr.add(img.getMd5());
+        }
+
+        LambdaQueryWrapper<Img> wrapper = new LambdaQueryWrapper<>();
+        wrapper.in(Img::getMd5, arr);
+
+        imgMapper.delete(wrapper);
     }
 
 }
