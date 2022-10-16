@@ -14,5 +14,6 @@ public class FileConfig {
     private String uploadPath;
     private String downloadPath;
     private String imgUploadPath;
+    private String fileUploadPath;
 
 }

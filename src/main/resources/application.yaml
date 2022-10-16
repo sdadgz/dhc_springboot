@@ -3,12 +3,14 @@ my:
     name: http://localhost
     uploadPath: 'D:/下载/不用思考，删这个文件夹/' # 文件下载到哪里，记得屁股加个杠 '/usr/local/springboot/static/'
     imgDir: 'img/'
+    fileDir: 'file/'
 
   file-config:
     uploadPath: '${my.server.uploadPath}'
     staticPath: '/static/' # 访问前缀，不是物理地址
     downloadPath: '${my.server.name}:${server.port}${my.file-config.staticPath}' # 存url到数据库时用的他
     imgUploadPath: '${my.file-config.uploadPath}${my.server.imgDir}'
+    fileUploadPath: '${my.file-config.uploadPath}${my.server.fileDir}'
 
 spring:
   datasource:

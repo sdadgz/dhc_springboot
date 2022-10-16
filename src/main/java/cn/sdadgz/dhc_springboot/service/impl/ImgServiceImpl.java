@@ -101,8 +101,7 @@ public class ImgServiceImpl extends ServiceImpl<ImgMapper, Img> implements IImgS
         Map<String, Object> map = new HashMap<>();
 
         // uuid
-        String salt = Arrays.toString(file.getBytes());
-        String uuid = IdUtil.uuid(salt);
+        String uuid = IdUtil.uuid(file.getOriginalFilename() + title + token);
 
         // 创建文件夹
         String bashPath = fileConfig.getImgUploadPath();

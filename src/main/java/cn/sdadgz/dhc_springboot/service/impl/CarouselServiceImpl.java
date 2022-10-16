@@ -45,7 +45,6 @@ public class CarouselServiceImpl extends ServiceImpl<CarouselMapper, Carousel> i
         int startPage = (currentPage - 1) * pageSize;
 
         // 获取
-        log.info("输入进来的title是 {}", title);
         List<Carousel> lists = carouselMapper.getPage(startPage, pageSize, title);
         long total = carouselMapper.getCount(title);
 

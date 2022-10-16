@@ -1,12 +1,11 @@
 package cn.sdadgz.dhc_springboot.controller;
 
-import cn.sdadgz.dhc_springboot.Utils.DocxUtil;
-import cn.sdadgz.dhc_springboot.Utils.FileUtil;
-import cn.sdadgz.dhc_springboot.Utils.MagicValueUtil;
+import cn.sdadgz.dhc_springboot.Utils.*;
 import cn.sdadgz.dhc_springboot.common.Result;
 import cn.sdadgz.dhc_springboot.config.BusinessException;
 import cn.sdadgz.dhc_springboot.entity.Essay;
 import cn.sdadgz.dhc_springboot.entity.Field;
+import cn.sdadgz.dhc_springboot.entity.File;
 import cn.sdadgz.dhc_springboot.mapper.EssayMapper;
 import cn.sdadgz.dhc_springboot.mapper.FieldMapper;
 import cn.sdadgz.dhc_springboot.mapper.UserMapper;
@@ -63,6 +62,36 @@ public class EssayController {
 
     @Resource
     private UserMapper userMapper;
+
+    // 鸠占鹊巢，video融essay里吧
+    @PostMapping("/video")
+    public Result uploadVideo(@RequestPart MultipartFile file,
+                              @RequestParam(value = "title", required = false) String title,
+                              @RequestParam("field") String field,
+                              @RequestHeader("token") String token) throws NoSuchAlgorithmException, IOException {
+
+        // 上传视频
+        File resultFile = FileUtil.uploadFile(file, token, title);
+        String path = FileUtil.toPath(resultFile.getUrl());
+
+        // 上传essay
+        Essay essay = new Essay();
+        essay.setDir(path);
+        essay.setText(resultFile.getUrl());
+        essay.setTitle(title == null || title.equals(EMPTY_STRING) ?
+                FileUtil.getName(resultFile.getOriginalFilename()) : title);
+        essay.setCreateTime(TimeUtil.now());
+        essay.setUserId(IdUtil.getId(token));
+        essayMapper.insert(essay);
+
+        // 上传领域
+        Field uploadField = new Field();
+        uploadField.setField(field);
+        uploadField.setEssayId(essay.getId());
+        fieldMapper.insert(uploadField);
+
+        return Result.success(essay);
+    }
 
     // 删除essay
     @DeleteMapping("")
