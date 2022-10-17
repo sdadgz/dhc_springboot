@@ -2,4 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.sdadgz.dhc_springboot.mapper.FileMapper">
 
+    <select id="getPage" resultType="cn.sdadgz.dhc_springboot.entity.File">
+        select *
+        from file f
+        <where>
+            <if test="title != null and title != ''">
+                f.original_filename like CONCAT('%',#{title},'%')
+            </if>
+        </where>
+        limit #{startPage},#{pageSize}
+    </select>
 </mapper>

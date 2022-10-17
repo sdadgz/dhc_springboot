@@ -29,10 +29,21 @@ public class FileController {
     @Resource
     private IFileService fileService;
 
+    // 获取分页
+    @GetMapping("/page")
+    public Result page(@RequestParam("currentPage") int currentPage,
+                       @RequestParam("pageSize") int pageSize,
+                       @RequestParam(value = "title", required = false) String title) {
+
+        Map<String, Object> map = fileService.getPage(currentPage, pageSize, title);
+
+        return Result.success(map);
+    }
+
     // 上传
     @PostMapping("/upload")
     public Result upload(@RequestPart MultipartFile file,
-                         @RequestParam(value = "title",required = false) String title,
+                         @RequestParam(value = "title", required = false) String title,
                          @RequestHeader("token") String token) throws NoSuchAlgorithmException, IOException {
 
         File resultFile = FileUtil.uploadFile(file, token, title);

@@ -6,10 +6,11 @@ import io.swagger.models.auth.In;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author sdadgz
@@ -25,5 +26,11 @@ public interface IFileService extends IService<File> {
 
     // 名字是否存在
     String nameExists(String name) throws NoSuchAlgorithmException;
+
+    // 获取分页
+    Map<String, Object> getPage(int currentPage, int pageSize, String title);
+
+    // 获取总数
+    long count(String title);
 
 }

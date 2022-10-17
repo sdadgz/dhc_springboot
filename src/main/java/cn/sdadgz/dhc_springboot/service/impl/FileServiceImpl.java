@@ -2,6 +2,7 @@ package cn.sdadgz.dhc_springboot.service.impl;
 
 import cn.sdadgz.dhc_springboot.Utils.FileUtil;
 import cn.sdadgz.dhc_springboot.Utils.IdUtil;
+import cn.sdadgz.dhc_springboot.Utils.MagicValueUtil;
 import cn.sdadgz.dhc_springboot.Utils.TimeUtil;
 import cn.sdadgz.dhc_springboot.entity.File;
 import cn.sdadgz.dhc_springboot.mapper.FileMapper;
@@ -12,7 +13,9 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -62,5 +65,28 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements IF
             name += IdUtil.uuid(wrapper + name) + type;
         }
         return name;
+    }
+
+    @Override
+    public Map<String, Object> getPage(int currentPage, int pageSize, String title) {
+
+        // 初始化
+        Map<String, Object> map = new HashMap<>();
+        int startPage = (currentPage - 1) * pageSize;
+
+        List<File> lists = fileMapper.getPage(startPage, pageSize, title);
+        long total = count(title);
+
+        map.put(MagicValueUtil.RESULT_LISTS, lists);
+        map.put(MagicValueUtil.RESULT_TOTAL, total);
+
+        return map;
+    }
+
+    @Override
+    public long count(String title) {
+        LambdaQueryWrapper<File> wrapper = new LambdaQueryWrapper<>();
+        wrapper.like(File::getOriginalFilename, title);
+        return fileMapper.selectCount(wrapper);
     }
 }
