@@ -5,6 +5,7 @@ import cn.sdadgz.dhc_springboot.Utils.MagicValueUtil;
 import cn.sdadgz.dhc_springboot.common.Result;
 import cn.sdadgz.dhc_springboot.entity.File;
 import cn.sdadgz.dhc_springboot.service.IFileService;
+import io.swagger.models.auth.In;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -56,7 +57,17 @@ public class FileController {
     public Result delete(@RequestBody Map<String, List<Integer>> requestMap) {
 
         List<Integer> idList = requestMap.get(MagicValueUtil.REQUEST_LISTS);
-        fileService.updateIsDelete(idList);
+        fileService.updateIsDelete(idList, true);
+
+        return Result.success();
+    }
+
+    // 恢复
+    @PutMapping
+    public Result recover(@RequestBody Map<String, List<Integer>> requestMap) {
+
+        List<Integer> idList = requestMap.get(MagicValueUtil.REQUEST_LISTS);
+        fileService.updateIsDelete(idList, false);
 
         return Result.success();
     }

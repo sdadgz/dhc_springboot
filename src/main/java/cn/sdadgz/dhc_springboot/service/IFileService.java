@@ -21,8 +21,8 @@ public interface IFileService extends IService<File> {
     // md5是否重复
     File exists(String md5);
 
-    // 根据ids批量虚拟删除
-    void updateIsDelete(List<Integer> idList);
+    // 根据ids批量虚拟删除恢复
+    void updateIsDelete(List<Integer> idList,boolean bool);
 
     // 名字是否存在
     String nameExists(String name) throws NoSuchAlgorithmException;

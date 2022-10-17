@@ -45,9 +45,9 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements IF
     }
 
     @Override
-    public void updateIsDelete(List<Integer> idList) {
+    public void updateIsDelete(List<Integer> idList, boolean bool) {
         File file = new File();
-        file.setIsDelete(true);
+        file.setIsDelete(bool);
 
         LambdaQueryWrapper<File> wrapper = new LambdaQueryWrapper<>();
         wrapper.in(File::getId, idList);
