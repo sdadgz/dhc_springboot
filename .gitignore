@@ -39,3 +39,6 @@ build/
 
 ### password ###
 src/main/resources/application.properties
+
+### 证书 ###
+src/main/resources/sdadgz.cn.jks

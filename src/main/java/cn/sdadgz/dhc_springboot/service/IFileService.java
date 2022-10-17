@@ -33,4 +33,7 @@ public interface IFileService extends IService<File> {
     // 获取总数
     long count(String title);
 
+    // 根据MD5删除
+    void deleteByMD5(List<File> files);
+
 }

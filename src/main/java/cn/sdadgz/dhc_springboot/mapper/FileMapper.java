@@ -23,4 +23,7 @@ public interface FileMapper extends BaseMapper<File> {
                        @Param("pageSize") int pageSize,
                        @Param("title") String title);
 
+    // 获取需要删除的文件
+    List<File> getDeleteFiles();
+
 }

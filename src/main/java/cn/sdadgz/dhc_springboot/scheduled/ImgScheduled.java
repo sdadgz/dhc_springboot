@@ -29,6 +29,9 @@ public class ImgScheduled {
     private void deleteImg() {
         log.info("每周六下午2点45分11秒清理删除的图片");
         List<Img> deleteImgs = imgMapper.getDeleteImgs();
+        if (deleteImgs.size() < 1){
+            return;
+        }
         for (Img deleteImg : deleteImgs) {
             String url = deleteImg.getUrl();
             String reduceUrl = deleteImg.getReduceUrl();

@@ -1,7 +1,7 @@
 my:
   server: # 上传到服务器需要改这个
-    name: http://localhost
-    uploadPath: 'D:/下载/不用思考，删这个文件夹/' # 文件下载到哪里，记得屁股加个杠 '/usr/local/springboot/static/'
+    name: https://sdadgz.cn
+    uploadPath: '/usr/local/springboot/static/' # 文件下载到哪里，记得屁股加个杠 '/usr/local/springboot/static/'
     imgDir: 'img/'
     fileDir: 'file/'
 
@@ -29,6 +29,9 @@ spring:
 
 server:
   port: 8002
+  ssl:
+    key-store: classpath:sdadgz.cn.jks
+    key-store-type: JKS
 
 mybatis:
   mapper-locations: mapper/*.xml

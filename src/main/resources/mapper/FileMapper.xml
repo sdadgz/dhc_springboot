@@ -12,4 +12,11 @@
         </where>
         limit #{startPage},#{pageSize}
     </select>
+
+    <select id="getDeleteFiles" resultType="cn.sdadgz.dhc_springboot.entity.File">
+        select f.md5, min(f.is_delete) fis_delete, max(f.url) as url
+        from file f
+        group by f.md5
+        having fis_delete = 1
+    </select>
 </mapper>

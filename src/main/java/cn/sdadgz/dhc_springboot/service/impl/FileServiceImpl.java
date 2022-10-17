@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -88,5 +89,18 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements IF
         LambdaQueryWrapper<File> wrapper = new LambdaQueryWrapper<>();
         wrapper.like(File::getOriginalFilename, title);
         return fileMapper.selectCount(wrapper);
+    }
+
+    @Override
+    public void deleteByMD5(List<File> files) {
+        List<String> arr = new ArrayList<>();
+        for (File file : files) {
+            arr.add(file.getMd5());
+        }
+
+        LambdaQueryWrapper<File> wrapper = new LambdaQueryWrapper<>();
+        wrapper.in(File::getMd5,arr);
+
+        fileMapper.delete(wrapper);
     }
 }
