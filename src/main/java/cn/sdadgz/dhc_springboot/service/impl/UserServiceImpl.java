@@ -1,5 +1,6 @@
 package cn.sdadgz.dhc_springboot.service.impl;
 
+import cn.sdadgz.dhc_springboot.Utils.MagicValueUtil;
 import cn.sdadgz.dhc_springboot.Utils.UserUtil;
 import cn.sdadgz.dhc_springboot.config.BusinessException;
 import cn.sdadgz.dhc_springboot.entity.User;
@@ -7,12 +8,13 @@ import cn.sdadgz.dhc_springboot.mapper.UserMapper;
 import cn.sdadgz.dhc_springboot.service.IUserService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.docx4j.wml.U;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -52,5 +54,22 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         }
 
         return users.get(0);
+    }
+
+    @Override
+    public Map<String, Object> getPage(int currentPage, int pageSize, String name) {
+
+        Map<String, Object> map = new HashMap<>();
+        int startPage = (currentPage - 1) * pageSize;
+
+        List<User> lists = userMapper.getPage(startPage, pageSize, name);
+        LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
+        wrapper.like(User::getName, name);
+        Long total = userMapper.selectCount(wrapper);
+
+        map.put(MagicValueUtil.RESULT_LISTS, lists);
+        map.put(MagicValueUtil.RESULT_TOTAL, total);
+
+        return map;
     }
 }

@@ -7,7 +7,7 @@
         from essay e
                  inner join user u on e.user_id = u.id
         where e.id in (select f.essay_id from field f where f.field = #{field})
-        order by e.create_time desc, e.id desc
+        order by e.to_top desc, e.create_time desc, e.id desc
         limit #{startPage}, #{pageSize}
     </select>
 

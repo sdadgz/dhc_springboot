@@ -1,22 +1,19 @@
 package cn.sdadgz.dhc_springboot.controller;
 
-import cn.sdadgz.dhc_springboot.Utils.JwtUtil;
-import cn.sdadgz.dhc_springboot.Utils.Md5Util;
-import cn.sdadgz.dhc_springboot.Utils.UserUtil;
+import cn.sdadgz.dhc_springboot.Utils.*;
 import cn.sdadgz.dhc_springboot.common.Result;
 import cn.sdadgz.dhc_springboot.config.BusinessException;
 import cn.sdadgz.dhc_springboot.entity.User;
 import cn.sdadgz.dhc_springboot.mapper.UserMapper;
 import cn.sdadgz.dhc_springboot.service.IUserService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -66,6 +63,27 @@ public class UserController {
         map.put("username", name);
 
         return Result.success(map);
+    }
+
+    // 获取全部用户
+    @GetMapping("/page")
+    public Result page(@RequestParam("currentPage") int currentPage,
+                       @RequestParam("pageSize") int pageSize,
+                       @RequestParam(value = "name", required = false) String name) {
+
+        Map<String, Object> map = userService.getPage(currentPage, pageSize, name);
+
+        return Result.success(map);
+    }
+
+    // 重命名
+    @PostMapping("/update")
+    public Result update(@RequestBody User user) throws NoSuchAlgorithmException {
+        if (user.getPassword() != null && !Objects.equals(user.getPassword(), MagicValueUtil.EMPTY_STRING)) {
+            user.setPassword(UserUtil.getPassword(user.getPassword()));
+        }
+        userMapper.insert(user);
+        return Result.success();
     }
 
 }

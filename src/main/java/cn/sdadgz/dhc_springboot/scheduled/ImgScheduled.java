@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class ImgScheduled {
     private void deleteImg() {
         log.info("每周六下午2点45分11秒清理删除的图片");
         List<Img> deleteImgs = imgMapper.getDeleteImgs();
-        if (deleteImgs.size() < 1){
+        if (deleteImgs.size() < 1) {
             return;
         }
         for (Img deleteImg : deleteImgs) {
@@ -41,6 +42,11 @@ public class ImgScheduled {
 
         // 数据库删除
         imgService.deleteByMD5(deleteImgs);
+    }
+
+    @PreDestroy
+    private void logCH() {
+        log.info("关闭");
     }
 
 }

@@ -8,7 +8,7 @@
                  inner join essay e on e.id = f.essay_id
                  inner join user u on e.user_id = u.id
         where f.field like CONCAT('%', #{field}, '%')
-        order by e.create_time desc, f.id desc
+        order by e.to_top desc, e.create_time desc, f.id desc
         limit #{startPage}, #{pageSize}
     </select>
 

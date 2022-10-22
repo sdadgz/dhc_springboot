@@ -48,4 +48,6 @@ public class Essay implements Serializable {
     @JsonIgnore
     private String dir;
 
+    private boolean toTop;
+
 }

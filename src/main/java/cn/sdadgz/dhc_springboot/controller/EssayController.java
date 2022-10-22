@@ -63,6 +63,20 @@ public class EssayController {
     @Resource
     private UserMapper userMapper;
 
+    // 文章置顶
+    @PutMapping("/toTop")
+    public Result toTop(@RequestParam("status") boolean status,
+                        @RequestParam("id") int id) {
+
+        Essay essay = new Essay();
+        essay.setId(id);
+        essay.setToTop(status);
+
+        essayMapper.updateById(essay);
+
+        return Result.success();
+    }
+
     // 鸠占鹊巢，video融essay里吧
     @PostMapping("/video")
     public Result uploadVideo(@RequestPart MultipartFile file,
