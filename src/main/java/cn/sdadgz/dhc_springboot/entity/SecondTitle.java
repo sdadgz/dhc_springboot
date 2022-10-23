@@ -37,4 +37,8 @@ public class SecondTitle implements Serializable {
     private Integer order;
 
     private Integer firstTitleId;
+
+    @TableField(exist = false)
+    private FirstTitle firstTitle;
+
 }

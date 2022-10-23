@@ -2,4 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.sdadgz.dhc_springboot.mapper.SecondTitleMapper">
 
+    <select id="getPage" resultMap="Map">
+        select *,ft.title ftt,ft.`order` fto,ft.id fti
+        from second_title st
+        inner join first_title ft on st.first_title_id = ft.id
+        <where>
+            <if test="title != null">
+                ftt like CONCAT('%',title,'%')
+                or st.title like CONCAT('%',title,'%')
+            </if>
+        </where>
+        order by st.`order`, st.id desc
+        limit #{startPPage}, #{pageSize}
+    </select>
+
+    <resultMap id="Map" type="secondTitle">
+        <association property="firstTitle" javaType="firstTitle">
+            <result property="id" column="fti"/>
+            <result property="title" column="ftt"/>
+            <result property="order" column="fto"/>
+        </association>
+    </resultMap>
 </mapper>
