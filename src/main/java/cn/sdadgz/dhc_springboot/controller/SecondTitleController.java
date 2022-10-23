@@ -27,6 +27,15 @@ public class SecondTitleController {
     @Resource
     private ISecondTitleService secondTitleService;
 
+    // 修改
+    @PutMapping
+    public Result update(@RequestBody SecondTitle secondTitle) {
+
+        int i = secondTitleMapper.updateById(secondTitle);
+
+        return Result.success(i);
+    }
+
     // 上传
     @PostMapping
     public Result upload(@RequestBody SecondTitle secondTitle) {

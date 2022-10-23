@@ -27,6 +27,15 @@ public class FirstTitleController {
     @Resource
     private IFirstTitleService firstTitleService;
 
+    // 修改
+    @PutMapping
+    public Result update(@RequestBody FirstTitle firstTitle) {
+
+        int i = firstTitleMapper.updateById(firstTitle);
+
+        return Result.success(i);
+    }
+
     // 上传
     @PostMapping
     public Result upload(@RequestBody FirstTitle firstTitle) {
