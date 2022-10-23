@@ -58,7 +58,7 @@ public class FieldServiceImpl extends ServiceImpl<FieldMapper, Field> implements
     @Override
     public Long getCount(String field) {
         LambdaQueryWrapper<Field> wrapper = new LambdaQueryWrapper<>();
-        wrapper.like(Field::getField, field);
+        wrapper.like(field != null, Field::getField, field);
         return fieldMapper.selectCount(wrapper);
     }
 

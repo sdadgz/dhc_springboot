@@ -63,8 +63,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         int startPage = (currentPage - 1) * pageSize;
 
         List<User> lists = userMapper.getPage(startPage, pageSize, name);
+
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
-        wrapper.like(User::getName, name);
+        wrapper.like(name != null, User::getName, name);
         Long total = userMapper.selectCount(wrapper);
 
         map.put(MagicValueUtil.RESULT_LISTS, lists);
