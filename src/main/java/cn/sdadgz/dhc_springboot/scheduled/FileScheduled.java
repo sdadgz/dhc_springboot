@@ -23,7 +23,7 @@ public class FileScheduled {
     @Resource
     private IFileService fileService;
 
-    @Scheduled(cron = "6 6 6 ? * 6")
+    @Scheduled(cron = "0 */2 * ? * *")
     public void deleteFile() {
         log.info("每周六早上6点6分6秒定时清理文件");
         List<File> deleteFiles = fileMapper.getDeleteFiles();

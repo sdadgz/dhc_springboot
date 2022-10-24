@@ -77,12 +77,13 @@ public class UserController {
     }
 
     // 重命名
-    @PostMapping("/update")
+    @PutMapping("/update")
     public Result update(@RequestBody User user) throws NoSuchAlgorithmException {
+        // 密码非空且正确
         if (user.getPassword() != null && !Objects.equals(user.getPassword(), MagicValueUtil.EMPTY_STRING)) {
             user.setPassword(UserUtil.getPassword(user.getPassword()));
         }
-        userMapper.insert(user);
+        userMapper.updateById(user);
         return Result.success();
     }
 

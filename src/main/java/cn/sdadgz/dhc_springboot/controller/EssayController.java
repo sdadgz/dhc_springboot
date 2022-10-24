@@ -108,7 +108,7 @@ public class EssayController {
     }
 
     // 删除essay
-    @DeleteMapping("")
+    @DeleteMapping
     public Result delete(@RequestBody Map<String, List<Integer>> idMap) {
 
         // 初始化

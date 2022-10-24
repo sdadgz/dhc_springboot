@@ -1,6 +1,8 @@
 package cn.sdadgz.dhc_springboot.controller;
 
+import cn.sdadgz.dhc_springboot.Utils.MagicValueUtil;
 import cn.sdadgz.dhc_springboot.common.Result;
+import cn.sdadgz.dhc_springboot.config.BusinessException;
 import cn.sdadgz.dhc_springboot.entity.SecondTitle;
 import cn.sdadgz.dhc_springboot.mapper.SecondTitleMapper;
 import cn.sdadgz.dhc_springboot.service.ISecondTitleService;
@@ -31,6 +33,10 @@ public class SecondTitleController {
     @PutMapping
     public Result update(@RequestBody SecondTitle secondTitle) {
 
+        if (secondTitle.getTitle().equals(MagicValueUtil.EMPTY_STRING)) {
+            secondTitle.setTitle(null);
+        }
+
         int i = secondTitleMapper.updateById(secondTitle);
 
         return Result.success(i);
@@ -39,6 +45,11 @@ public class SecondTitleController {
     // 上传
     @PostMapping
     public Result upload(@RequestBody SecondTitle secondTitle) {
+
+        if (secondTitle.getTitle().equals(MagicValueUtil.EMPTY_STRING)) {
+            secondTitle.setTitle(null);
+
+        }
 
         int insert = secondTitleMapper.insert(secondTitle);
 

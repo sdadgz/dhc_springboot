@@ -60,9 +60,12 @@ public class FileUtil {
 
         // 初始化
         cn.sdadgz.dhc_springboot.entity.File uploadFile = new cn.sdadgz.dhc_springboot.entity.File();
-        String originalFilename = title == null || title.equals(MagicValueUtil.EMPTY_STRING) ?
-                file.getOriginalFilename() : title;
+        String originalFilename = file.getOriginalFilename();
         String type = getType(originalFilename);
+        // 如果自定义标题
+        if (!(title == null || title.equals(MagicValueUtil.EMPTY_STRING))) {
+            originalFilename = title;
+        }
         String username = IdUtil.getName(token);
         String uuid = IdUtil.uuid(file.getOriginalFilename() + token + title);
 
