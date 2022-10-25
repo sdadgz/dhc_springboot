@@ -1,5 +1,6 @@
 package cn.sdadgz.dhc_springboot.mapper;
 
+import cn.sdadgz.dhc_springboot.Dto.HeadItem;
 import cn.sdadgz.dhc_springboot.entity.SecondTitle;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
@@ -22,5 +23,8 @@ public interface SecondTitleMapper extends BaseMapper<SecondTitle> {
     List<SecondTitle> getPage(@Param("startPPage") int startPage,
                               @Param("pageSize")int pageSize,
                               @Param("title")String title);
+
+    // 获取全部
+    List<HeadItem> getAll();
 
 }

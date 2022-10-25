@@ -2,7 +2,6 @@ package cn.sdadgz.dhc_springboot.controller;
 
 import cn.sdadgz.dhc_springboot.Utils.MagicValueUtil;
 import cn.sdadgz.dhc_springboot.common.Result;
-import cn.sdadgz.dhc_springboot.config.BusinessException;
 import cn.sdadgz.dhc_springboot.entity.SecondTitle;
 import cn.sdadgz.dhc_springboot.mapper.SecondTitleMapper;
 import cn.sdadgz.dhc_springboot.service.ISecondTitleService;

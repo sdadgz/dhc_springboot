@@ -38,13 +38,13 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
     auto-mapping-behavior: full
-  type-aliases-package: cn.sdadgz.dhc_springboot.entity
+  type-aliases-package: cn.sdadgz.dhc_springboot.entity,  cn.sdadgz.dhc_springboot.Dto
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
     auto-mapping-behavior: full
-  type-aliases-package: cn.sdadgz.dhc_springboot.entity
+  type-aliases-package: cn.sdadgz.dhc_springboot.entity,  cn.sdadgz.dhc_springboot.Dto
 
 #日志
 logging:

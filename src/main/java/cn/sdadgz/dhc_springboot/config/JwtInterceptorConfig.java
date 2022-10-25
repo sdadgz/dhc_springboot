@@ -24,6 +24,7 @@ public class JwtInterceptorConfig implements WebMvcConfigurer {
                         "/carousel/page", // 获取轮播图分页
                         "/carousel", // 获取全部轮播图
                         "/friendLink/page", // 友情连接分页
+                        "/headItem/**", // 头
                         "/static/**");
     }
 

@@ -16,11 +16,23 @@
         limit #{startPPage}, #{pageSize}
     </select>
 
+    <select id="getAll" resultMap="HeadItemMap">
+        select ft.title label, st.title cl
+        from first_title ft
+                 left join second_title st on ft.id = st.first_title_id
+    </select>
+
     <resultMap id="Map" type="secondTitle">
         <association property="firstTitle" javaType="firstTitle">
             <result property="id" column="fti"/>
             <result property="title" column="ftt"/>
             <result property="order" column="fto"/>
         </association>
+    </resultMap>
+
+    <resultMap id="HeadItemMap" type="headItem">
+        <collection property="children" ofType="headItem">
+            <result property="label" column="cl"/>
+        </collection>
     </resultMap>
 </mapper>
