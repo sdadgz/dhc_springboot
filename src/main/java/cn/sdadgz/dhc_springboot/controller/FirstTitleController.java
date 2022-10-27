@@ -6,9 +6,11 @@ import cn.sdadgz.dhc_springboot.config.BusinessException;
 import cn.sdadgz.dhc_springboot.entity.FirstTitle;
 import cn.sdadgz.dhc_springboot.mapper.FirstTitleMapper;
 import cn.sdadgz.dhc_springboot.service.IFirstTitleService;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,6 +30,16 @@ public class FirstTitleController {
 
     @Resource
     private IFirstTitleService firstTitleService;
+
+    // 删除
+    @DeleteMapping
+    public Result delete(@RequestBody Map<String, List<Integer>> requestMap) {
+
+        List<Integer> idList = requestMap.get(MagicValueUtil.REQUEST_LISTS);
+        int i = firstTitleMapper.deleteBatchIds(idList);
+
+        return Result.success(i);
+    }
 
     // 修改
     @PutMapping

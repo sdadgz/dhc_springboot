@@ -12,26 +12,29 @@
                 or st.title like CONCAT('%',title,'%')
             </if>
         </where>
-        order by st.`order`, st.id desc
+        order by st.`order`, st.id
         limit #{startPPage}, #{pageSize}
     </select>
 
     <select id="getAll" resultMap="HeadItemMap">
-        select ft.title label, st.title cl
+        select ft.title label, st.title cl, ft.id, st.id ci
         from first_title ft
                  left join second_title st on ft.id = st.first_title_id
+        order by ft.`order`, ft.id, st.`order`, st.id
     </select>
 
     <resultMap id="Map" type="secondTitle">
         <association property="firstTitle" javaType="firstTitle">
-            <result property="id" column="fti"/>
+            <id property="id" column="fti"/>
             <result property="title" column="ftt"/>
             <result property="order" column="fto"/>
         </association>
     </resultMap>
 
     <resultMap id="HeadItemMap" type="headItem">
+        <id property="id" column="id"/>
         <collection property="children" ofType="headItem">
+            <id property="id" column="ci"/>
             <result property="label" column="cl"/>
         </collection>
     </resultMap>

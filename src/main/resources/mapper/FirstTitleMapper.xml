@@ -10,7 +10,7 @@
                 ft.title like CONCAT('%',title,'%')
             </if>
         </where>
-        order by ft.`order`,ft.id desc
+        order by ft.`order`,ft.id
         limit #{startPage}, #{pageSize}
     </select>
 </mapper>

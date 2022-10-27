@@ -9,6 +9,7 @@ import java.util.List;
 @Setter
 public class HeadItem {
     // 返回一二级标题
+    private Integer id;
     private String label;
     private List<HeadItem> children;
 }

@@ -72,7 +72,7 @@ public class EssayServiceImpl extends ServiceImpl<EssayMapper, Essay> implements
     @Override
     public List<Essay> getEssayByIds(List<Integer> ids) {
         LambdaQueryWrapper<Essay> wrapper = new LambdaQueryWrapper<>();
-        wrapper.in(Essay::getId,ids);
+        wrapper.in(Essay::getId, ids);
         return essayMapper.selectList(wrapper);
     }
 
