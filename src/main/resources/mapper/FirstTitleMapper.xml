@@ -7,7 +7,7 @@
         from first_title ft
         <where>
             <if test="title != null">
-                ft.title like CONCAT('%',title,'%')
+                ft.title like CONCAT('%',#{title},'%')
             </if>
         </where>
         order by ft.`order`,ft.id
