@@ -8,7 +8,7 @@
         inner join first_title ft on st.first_title_id = ft.id
         <where>
             <if test="title != null">
-                ftt like CONCAT('%',#{title},'%')
+                ft.title like CONCAT('%',#{title},'%')
                 or st.title like CONCAT('%',#{title},'%')
             </if>
         </where>
