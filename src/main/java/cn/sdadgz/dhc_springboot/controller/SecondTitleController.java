@@ -3,12 +3,14 @@ package cn.sdadgz.dhc_springboot.controller;
 import cn.sdadgz.dhc_springboot.Utils.MagicValueUtil;
 import cn.sdadgz.dhc_springboot.common.Result;
 import cn.sdadgz.dhc_springboot.entity.SecondTitle;
+import cn.sdadgz.dhc_springboot.entity.User;
 import cn.sdadgz.dhc_springboot.mapper.SecondTitleMapper;
 import cn.sdadgz.dhc_springboot.service.ISecondTitleService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * <p>
