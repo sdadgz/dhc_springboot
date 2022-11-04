@@ -12,7 +12,6 @@ public class Generator {
         String localPath = "D:/工具/编程/idea/java工作区/";
         String projectName = "dhc_springboot";
         String packagePath = "cn.sdadgz.dhc_springboot";
-//        String localPath = "D:/CODE/";
 
         // 表名
         String tableName = "second_title";
