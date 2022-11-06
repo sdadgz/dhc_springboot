@@ -1,7 +1,6 @@
 package cn.sdadgz.dhc_springboot.controller;
 
 import cn.sdadgz.dhc_springboot.common.Result;
-import cn.sdadgz.dhc_springboot.entity.Field;
 import cn.sdadgz.dhc_springboot.mapper.FieldMapper;
 import cn.sdadgz.dhc_springboot.service.IFieldService;
 import org.springframework.web.bind.annotation.GetMapping;
