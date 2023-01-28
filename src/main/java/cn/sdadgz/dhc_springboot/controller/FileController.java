@@ -5,7 +5,6 @@ import cn.sdadgz.dhc_springboot.Utils.MagicValueUtil;
 import cn.sdadgz.dhc_springboot.common.Result;
 import cn.sdadgz.dhc_springboot.entity.File;
 import cn.sdadgz.dhc_springboot.service.IFileService;
-import io.swagger.models.auth.In;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 

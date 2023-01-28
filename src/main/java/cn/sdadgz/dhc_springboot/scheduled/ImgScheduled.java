@@ -26,9 +26,9 @@ public class ImgScheduled {
     private IImgService imgService;
 
     // 定期物理删除
-    @Scheduled(cron = "0 */3 * * * ?")
+    @Scheduled(cron = "7 7 7 ? * 7")
     private void deleteImg() {
-        log.info("每周六下午2点45分11秒清理删除的图片");
+        log.info("清理删除的图片");
         List<Img> deleteImgs = imgMapper.getDeleteImgs();
         if (deleteImgs.size() < 1) {
             return;

@@ -46,7 +46,7 @@ mybatis-plus:
     auto-mapping-behavior: full
   type-aliases-package: cn.sdadgz.dhc_springboot.entity,  cn.sdadgz.dhc_springboot.Dto
 
-#日志
+# 日志
 logging:
   level:
     root: info

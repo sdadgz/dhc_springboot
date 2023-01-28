@@ -23,8 +23,8 @@ public interface CarouselMapper extends BaseMapper<Carousel> {
 
     // 获取分页
     List<Carousel> getPage(@Param("startPage") int startPage,
-                 @Param("pageSize") int pageSize,
-                 @Param("title") String title);
+                           @Param("pageSize") int pageSize,
+                           @Param("title") String title);
 
     // 获取总数
     long getCount(@Param("title") String title);

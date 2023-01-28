@@ -23,9 +23,9 @@ public class FileScheduled {
     @Resource
     private IFileService fileService;
 
-    @Scheduled(cron = "0 */2 * ? * *")
+    @Scheduled(cron = "6 6 6 ? * 6")
     public void deleteFile() {
-        log.info("每周六早上6点6分6秒定时清理文件");
+        log.info("定时清理文件");
         List<File> deleteFiles = fileMapper.getDeleteFiles();
 
         if (deleteFiles.size() > 0) {

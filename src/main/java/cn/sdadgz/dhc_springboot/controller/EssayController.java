@@ -49,9 +49,6 @@ public class EssayController {
     private EssayMapper essayMapper;
 
     @Resource
-    private IImgService imgService;
-
-    @Resource
     private IFieldService fieldService;
 
     @Resource
@@ -92,8 +89,8 @@ public class EssayController {
         Essay essay = new Essay();
         essay.setDir(path);
         essay.setText(resultFile.getUrl());
-        essay.setTitle(title == null || title.equals(EMPTY_STRING) ?
-                FileUtil.getName(resultFile.getOriginalFilename()) : title);
+        essay.setTitle(title == null ||
+                title.equals(EMPTY_STRING) ? FileUtil.getName(resultFile.getOriginalFilename()) : title);
         essay.setCreateTime(TimeUtil.now());
         essay.setUserId(IdUtil.getId(token));
         essayMapper.insert(essay);

@@ -21,7 +21,7 @@ public class CarouselScheduled {
     @Resource
     private ICarouselService carouselService;
 
-    @Scheduled(cron = "0 */4 * * * ?")
+    @Scheduled(cron = "11 45 14 ? * 6")
     public void deleteCarousel() {
         log.info("开始删除冗余的轮播图");
     }
