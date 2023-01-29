@@ -26,4 +26,7 @@ public interface ICarouselService extends IService<Carousel> {
     // 获取全部
     List<Carousel> getAll();
 
+    // 获取垃圾
+    List<Carousel> getGC();
+
 }

@@ -4,10 +4,10 @@ import cn.sdadgz.dhc_springboot.Utils.FileUtil;
 import cn.sdadgz.dhc_springboot.Utils.JwtUtil;
 import cn.sdadgz.dhc_springboot.Utils.UserUtil;
 import cn.sdadgz.dhc_springboot.config.FileConfig;
-import cn.sdadgz.dhc_springboot.entity.Essay;
-import cn.sdadgz.dhc_springboot.entity.Img;
-import cn.sdadgz.dhc_springboot.entity.User;
+import cn.sdadgz.dhc_springboot.entity.*;
+import cn.sdadgz.dhc_springboot.mapper.FieldMapper;
 import cn.sdadgz.dhc_springboot.mapper.ImgMapper;
+import cn.sdadgz.dhc_springboot.mapper.SecondTitleMapper;
 import cn.sdadgz.dhc_springboot.service.ICarouselService;
 import cn.sdadgz.dhc_springboot.service.IEssayService;
 import cn.sdadgz.dhc_springboot.service.IImgService;
@@ -52,17 +52,22 @@ class DhcSpringbootApplicationTests {
     @Resource
     private IImgService imgService;
 
+    @Resource
+    private SecondTitleMapper secondTitleMapper;
+
+    @Resource
+    private FieldMapper fieldMapper;
+
     @Test
     void contextLoads() {
 
     }
 
+    // 获取token
     @Test
-        // 获取token
     void getToken() throws NoSuchAlgorithmException {
         String union = "1";
         String token = JwtUtil.createToken(union, union, UserUtil.getPassword(union));
         System.out.println(token);
     }
-
 }

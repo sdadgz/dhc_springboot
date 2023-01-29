@@ -27,4 +27,7 @@ public interface IFieldService extends IService<Field> {
 
     // 根据essayId删除
     void deleteByEssayIds(List<Integer> ids);
+
+    // 同步field
+    void synchronousField();
 }

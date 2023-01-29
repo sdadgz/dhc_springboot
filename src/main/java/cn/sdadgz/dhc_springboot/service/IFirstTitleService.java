@@ -21,4 +21,7 @@ public interface IFirstTitleService extends IService<FirstTitle> {
     // 获取总数
     long count(String title);
 
+    // 根据内容获取该一级标题
+    FirstTitle getFirstTitleByTitle(String title);
+
 }

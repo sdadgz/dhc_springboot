@@ -48,4 +48,11 @@ public class FirstTitleServiceImpl extends ServiceImpl<FirstTitleMapper, FirstTi
         wrapper.like(title != null, FirstTitle::getTitle, title);
         return firstTitleMapper.selectCount(wrapper);
     }
+
+    @Override
+    public FirstTitle getFirstTitleByTitle(String title) {
+        LambdaQueryWrapper<FirstTitle> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(FirstTitle::getTitle, title);
+        return firstTitleMapper.selectOne(wrapper);
+    }
 }

@@ -5,10 +5,12 @@ import cn.sdadgz.dhc_springboot.common.Result;
 import cn.sdadgz.dhc_springboot.entity.SecondTitle;
 import cn.sdadgz.dhc_springboot.entity.User;
 import cn.sdadgz.dhc_springboot.mapper.SecondTitleMapper;
+import cn.sdadgz.dhc_springboot.service.IFieldService;
 import cn.sdadgz.dhc_springboot.service.ISecondTitleService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -30,6 +32,9 @@ public class SecondTitleController {
     @Resource
     private ISecondTitleService secondTitleService;
 
+    @Resource
+    private IFieldService fieldService;
+
     // 修改
     @PutMapping
     public Result update(@RequestBody SecondTitle secondTitle) {
@@ -40,6 +45,8 @@ public class SecondTitleController {
 
         int i = secondTitleMapper.updateById(secondTitle);
 
+        fieldService.synchronousField();
+
         return Result.success(i);
     }
 
@@ -49,7 +56,6 @@ public class SecondTitleController {
 
         if (secondTitle.getTitle().equals(MagicValueUtil.EMPTY_STRING)) {
             secondTitle.setTitle(null);
-
         }
 
         int insert = secondTitleMapper.insert(secondTitle);
@@ -65,6 +71,16 @@ public class SecondTitleController {
         Map<String, Object> map = secondTitleService.getPage(currentPage, pageSize, title);
 
         return Result.success(map);
+    }
+
+    // 删除
+    @DeleteMapping
+    public Result delete(@RequestBody Map<String, List<Integer>> requestMap) {
+
+        List<Integer> idList = requestMap.get(MagicValueUtil.REQUEST_LISTS);
+        int i = secondTitleMapper.deleteBatchIds(idList);
+
+        return Result.success(i);
     }
 
 }

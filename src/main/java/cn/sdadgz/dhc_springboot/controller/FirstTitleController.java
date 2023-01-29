@@ -5,6 +5,7 @@ import cn.sdadgz.dhc_springboot.common.Result;
 import cn.sdadgz.dhc_springboot.config.BusinessException;
 import cn.sdadgz.dhc_springboot.entity.FirstTitle;
 import cn.sdadgz.dhc_springboot.mapper.FirstTitleMapper;
+import cn.sdadgz.dhc_springboot.service.IFieldService;
 import cn.sdadgz.dhc_springboot.service.IFirstTitleService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +32,9 @@ public class FirstTitleController {
     @Resource
     private IFirstTitleService firstTitleService;
 
+    @Resource
+    private IFieldService fieldService;
+
     // 删除
     @DeleteMapping
     public Result delete(@RequestBody Map<String, List<Integer>> requestMap) {
@@ -50,6 +54,8 @@ public class FirstTitleController {
         }
 
         int i = firstTitleMapper.updateById(firstTitle);
+
+        fieldService.synchronousField();
 
         return Result.success(i);
     }

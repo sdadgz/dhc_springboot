@@ -34,7 +34,7 @@ public class FieldServiceImpl extends ServiceImpl<FieldMapper, Field> implements
     public Integer setField(int essayId, String field) {
         Field uploadObj = new Field();
         uploadObj.setEssayId(essayId);
-        uploadObj.setField(field);
+        uploadObj.setFieldAndFirstTitleIdAndSecondTitleId(field);
         fieldMapper.insert(uploadObj);
         return uploadObj.getId();
     }
@@ -67,6 +67,13 @@ public class FieldServiceImpl extends ServiceImpl<FieldMapper, Field> implements
         LambdaQueryWrapper<Field> wrapper = new LambdaQueryWrapper<>();
         wrapper.in(Field::getEssayId, ids);
         fieldMapper.delete(wrapper);
+    }
+
+    @Override
+    public void synchronousField() {
+        List<Field> fields = fieldMapper.selectList(null);
+        fields.forEach(Field::synchronousField);
+        fields.forEach(fieldMapper::updateById);
     }
 
 }

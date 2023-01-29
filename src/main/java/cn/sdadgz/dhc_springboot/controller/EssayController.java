@@ -97,7 +97,7 @@ public class EssayController {
 
         // 上传领域
         Field uploadField = new Field();
-        uploadField.setField(field);
+        uploadField.setFieldAndFirstTitleIdAndSecondTitleId(field);
         uploadField.setEssayId(essay.getId());
         fieldMapper.insert(uploadField);
 
@@ -145,7 +145,7 @@ public class EssayController {
             // 修改领域
             Field updateField = new Field();
             updateField.setId(id);
-            updateField.setField(field);
+            updateField.setFieldAndFirstTitleIdAndSecondTitleId(field);
             int i = fieldMapper.updateById(updateField);
             map.put(RESULT_STATUS, i > 0);
         }
