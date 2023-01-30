@@ -8,10 +8,7 @@ import cn.sdadgz.dhc_springboot.entity.*;
 import cn.sdadgz.dhc_springboot.mapper.FieldMapper;
 import cn.sdadgz.dhc_springboot.mapper.ImgMapper;
 import cn.sdadgz.dhc_springboot.mapper.SecondTitleMapper;
-import cn.sdadgz.dhc_springboot.service.ICarouselService;
-import cn.sdadgz.dhc_springboot.service.IEssayService;
-import cn.sdadgz.dhc_springboot.service.IImgService;
-import cn.sdadgz.dhc_springboot.service.IUserService;
+import cn.sdadgz.dhc_springboot.service.*;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFPictureData;
 import org.docx4j.Docx4J;
@@ -58,6 +55,9 @@ class DhcSpringbootApplicationTests {
     @Resource
     private FieldMapper fieldMapper;
 
+    @Resource
+    private IFieldService fieldService;
+
     @Test
     void contextLoads() {
 
@@ -69,5 +69,10 @@ class DhcSpringbootApplicationTests {
         String union = "1";
         String token = JwtUtil.createToken(union, union, UserUtil.getPassword(union));
         System.out.println(token);
+    }
+
+    @Test
+    void field(){
+        fieldService.synchronousField();
     }
 }

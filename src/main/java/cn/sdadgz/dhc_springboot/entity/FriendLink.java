@@ -37,4 +37,6 @@ public class FriendLink implements Serializable {
     private Img img;
 
     private String url;
+
+    private Integer essayId;
 }
