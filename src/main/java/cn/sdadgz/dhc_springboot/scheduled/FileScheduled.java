@@ -37,9 +37,8 @@ public class FileScheduled {
 
             // 数据库删除
             fileService.deleteByMD5(deleteFiles);
-        }else {
+        } else {
             log.info("没有文件可以清理");
         }
-
     }
 }

@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "my.file-config")
 public class FileConfig {
 
-    private String uploadPath;
-    private String downloadPath;
+    private String uploadPath; // 上传的物理位置
+    private String downloadPath; // 下载的url
     private String imgUploadPath;
     private String fileUploadPath;
 

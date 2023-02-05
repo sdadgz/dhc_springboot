@@ -1,6 +1,7 @@
 my:
   server: # 上传到服务器需要改这个
-    name: https://sdadgz.cn
+    baseUrl: '/springboot/8000'
+    name: https://sjz-rtic.com
     uploadPath: '/usr/local/springboot/static/' # 文件下载到哪里，记得屁股加个杠 '/usr/local/springboot/static/'
     imgDir: 'img/'
     fileDir: 'file/'
@@ -8,13 +9,13 @@ my:
   file-config:
     uploadPath: '${my.server.uploadPath}'
     staticPath: '/static/' # 访问前缀，不是物理地址
-    downloadPath: '${my.server.name}:${server.port}${my.file-config.staticPath}' # 存url到数据库时用的他
+    downloadPath: '${my.server.name}${my.server.baseUrl}${my.file-config.staticPath}' # 存url到数据库时用的他
     imgUploadPath: '${my.file-config.uploadPath}${my.server.imgDir}'
     fileUploadPath: '${my.file-config.uploadPath}${my.server.fileDir}'
 
 spring:
   datasource:
-    url: jdbc:mysql://sdadgz.cn:3307/dhc?serverTimezone=UTC&characterEncoding=utf8
+    url: jdbc:mysql://sjz-rtic.com:3306/dhc?serverTimezone=UTC&characterEncoding=utf8
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     username: root
